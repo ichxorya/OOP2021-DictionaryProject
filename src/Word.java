@@ -1,15 +1,20 @@
 public class Word {
-    private String word_target;
-    private String word_explain;
+    /**
+     * Word class - Contains an English word and its Vietnamese explanation.
+     */
 
-    String getWord_target() {
-        return word_target;
-    }
+    /**
+     * Variables.
+     */
 
-    String getWord_explain() {
-        return word_explain;
-    }
+    private String word_target;     // English
+    private String word_explain;    // Vietnamese
 
+    /**
+     * Methods.
+     */
+
+    /* Constructors */
     Word() {
         word_target = "";
         word_explain = "";
@@ -18,5 +23,14 @@ public class Word {
     Word(String en, String vie) {
         word_target = en;
         word_explain = vie;
+    }
+
+    /* Getters */
+    String getWord_target() {
+        return word_target;
+    }
+
+    String getWord_explain() {
+        return word_explain;
     }
 }

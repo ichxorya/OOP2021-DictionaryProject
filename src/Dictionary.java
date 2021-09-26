@@ -1,4 +1,6 @@
 public class Dictionary {
-    static Word[] dict = {};
-
+    /**
+     * Dictionary class - Contains an array of Word.
+     */
+    static Word[] dictionary = {};
 }
