@@ -10,6 +10,7 @@ public class DictionaryCommandline {
 
     void dictionaryBasic() {
         top.insertFromCommandline();
+        System.out.println("NO   | English    | Vietnamese");
         showAllWords();
     }
 
