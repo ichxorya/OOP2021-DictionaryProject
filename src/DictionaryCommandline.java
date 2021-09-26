@@ -1,5 +1,3 @@
-import java.sql.SQLOutput;
-
 public class DictionaryCommandline {
     /**
      * DictionaryCommandline class - Main class.
