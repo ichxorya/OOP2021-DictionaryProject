@@ -2,6 +2,11 @@ import java.util.Scanner;
 
 public class DictionaryManagement {
     /**
+     * DictionaryManagement class -
+     */
+
+
+    /**
      * Variables.
      */
     static Dictionary book;
@@ -10,12 +15,6 @@ public class DictionaryManagement {
     /**
      * Methods.
      */
-
-    /* Return a non-empty String */
-    String nonEmptyString() {
-        String aWord = sc.nextLine();
-        return  aWord;
-    }
 
     void insertFromCommandline() {
         /* Variables */
@@ -33,7 +32,7 @@ public class DictionaryManagement {
         }
         autoFlush = sc.nextLine();          // Flushed!
 
-        book.dict = new Word[numberOfWord];
+        book.dictionary = new Word[numberOfWord];
         while (numberOfWord > 0) {
             System.out.println("Input the English word and its Vietnamese translation: ");
             wordEn = sc.nextLine();
@@ -50,7 +49,7 @@ public class DictionaryManagement {
             }
 
             /* Added to the dictionary */
-            book.dict[dictIndex] = new Word(wordEn, wordVie);
+            book.dictionary[dictIndex] = new Word(wordEn, wordVie);
 
             ++dictIndex;
             --numberOfWord;
