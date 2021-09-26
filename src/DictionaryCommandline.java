@@ -1,16 +1,43 @@
+import java.sql.SQLOutput;
+
 public class DictionaryCommandline {
-    DictionaryManagement top = new DictionaryManagement();
+    /**
+     * DictionaryCommandline class - Main class.
+     */
+
+    DictionaryManagement cliDictionary = new DictionaryManagement();
 
     void showAllWords() {
+        int lengthOfDictionary = Dictionary.dictionary.length;
+        /* Message's length:012345678901234567890123456789*/
         System.out.println("NO   | English    | Vietnamese");
-        for (int i = 0; i < top.book.dictionary.length; i++) {
-            System.out.println((i + 1) + "   " + top.book.dictionary[i].getWord_target() + "   " + top.book.dictionary[i].getWord_explain());
+        for (int i = 0; i < lengthOfDictionary; i++) {
+            String wordEn = Dictionary.dictionary[i].getWord_target();
+            String wordVie = Dictionary.dictionary[i].getWord_explain();
+
+            /* Print out the English word and its Vietnamese translation */
+            String formattedWord = formatString(i + 1, wordEn, wordVie);
+            System.out.println(formattedWord);
         }
     }
 
     void dictionaryBasic() {
-        top.insertFromCommandline();
+        cliDictionary.insertFromCommandline();
         showAllWords();
+    }
+
+    String formatString(int index, String firstWord, String secondWord) {
+        /* Space-padding */
+        String indexStr = index + "";
+        firstWord = "| " + firstWord;
+        secondWord = "| " + secondWord;
+        while (indexStr.length() < 5) {
+            indexStr += ' ';
+        }
+        while ((indexStr + firstWord).length() < 18) {
+            firstWord += ' ';
+        }
+        return (indexStr + firstWord + secondWord);
     }
 
     public static void main(String[] args) {
