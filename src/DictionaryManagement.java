@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class DictionaryManagement {
     /**
-     * DictionaryManagement class -
+     * DictionaryManagement class - To insert new words to the dictionary from the CLI (command line interface).
+     * More features (not bugs) will be implemented in the near future.
      */
 
 
@@ -10,7 +11,7 @@ public class DictionaryManagement {
      * Variables.
      */
     static Dictionary book;
-    Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);    // Using scanner to receive user inputs.
 
     /**
      * Methods.
@@ -51,8 +52,8 @@ public class DictionaryManagement {
             /* Added to the dictionary */
             book.dictionary[dictIndex] = new Word(wordEn, wordVie);
 
-            ++dictIndex;
-            --numberOfWord;
+            ++dictIndex;    // Increase the index of the Word array
+            --numberOfWord; // Reduce the number of Word in the queue by 1
         }
     }
 }
