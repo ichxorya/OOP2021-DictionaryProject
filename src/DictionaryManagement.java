@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class DictionaryManagement {
@@ -8,10 +9,17 @@ public class DictionaryManagement {
         while (sc.hasNextLine()) {
             String wordEn = sc.nextLine();
             String wordVie = sc.nextLine();
-            Word[] newbook = new Word[book.dict.length + 1];
-            System.arraycopy(book.dict, 0, book.dict, 0, book.dict.length);
+
+            Word[] newbook = Arrays.copyOf(book.dict, book.dict.length + 1);
+            newbook[newbook.length - 1] = new Word(wordEn, wordVie);
             book.dict = newbook;
-            book.dict[book.dict.length - 1] = new Word(wordEn, wordVie);
+        }
+    }
+    public static void main(String[] args) {
+        DictionaryManagement top = new DictionaryManagement();
+        top.insertFromCommandline();
+        for (int i = 0; i < top.book.dict.length; i++) {
+            System.out.println((i + 1) + "   " + top.book.dict[i].getWord_target() + "   " + top.book.dict[i].getWord_explain());
         }
     }
 }
