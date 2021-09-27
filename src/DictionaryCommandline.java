@@ -20,7 +20,7 @@ public class DictionaryCommandline {
     }
 
     void dictionaryBasic() {
-        cliDictionary.insertFromCommandline();
+        cliDictionary.insertFromFile();
         showAllWords();
     }
 
