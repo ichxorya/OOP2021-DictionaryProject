@@ -1,8 +1,7 @@
+/**
+ * DictionaryCommandline class - Main class.
+ */
 public class DictionaryCommandline {
-    /**
-     * DictionaryCommandline class - Main class.
-     */
-
     DictionaryManagement cliDictionary = new DictionaryManagement();
 
     void showAllWords() {

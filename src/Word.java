@@ -1,8 +1,7 @@
+/**
+ * Word class - Contains an English word and its Vietnamese explanation.
+ */
 public class Word {
-    /**
-     * Word class - Contains an English word and its Vietnamese explanation.
-     */
-
     /**
      * Variables.
      */
