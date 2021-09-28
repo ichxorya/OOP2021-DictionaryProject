@@ -5,4 +5,4 @@ BN - This Readme file was created since I've just done the insertFromCommandline
 Versions:
 - main: primitive commandline dictionary (???)
 - betaN: updated insertFromCommandline()
-- betQ: implementing a data structure for the dictionary
+- betaQ: implementing a data structure for the dictionary
