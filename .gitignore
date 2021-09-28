@@ -25,3 +25,4 @@ hs_err_pid*
 *.iml
 out/production/OOP2021-DictionaryProject/dictionaries.txt
 .idea/shelf/Uncommitted_changes_before_Checkout_at_28_09_2021_9_32_PM_[Changes]/shelved.patch
+*.patch
