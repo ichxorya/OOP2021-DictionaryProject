@@ -24,8 +24,7 @@ public class DictionaryManagement {
             numberOfWords = sc.nextInt();    // After using sc.nextInt(), we have to flush (?) the input stream
         }
         // Flushed!
-        // Important variable meow~~
-        String autoFlush = sc.nextLine();
+        String autoFlush = sc.nextLine();   // Important variable meow~~
 
         Dictionary.dictionary = new Word[numberOfWords];
         while (numberOfWords > 0) {
@@ -67,7 +66,7 @@ public class DictionaryManagement {
 
             // Number of Lines in file = Number of Words
             numberOfWords = numberOfLines(dictionaryFile);
-            Dictionary.dictionary = new Word[numberOfWords - 1];
+            Dictionary.dictionary = new Word[numberOfWords];
 
             // Read file
             sc = new Scanner(dictionaryFile);
@@ -78,8 +77,8 @@ public class DictionaryManagement {
                 parser = new Scanner(wordLine);
                 parser.useDelimiter("\t");
 
-                wordEn = sc.next();
-                wordVie = sc.next();
+                wordEn = parser.next();
+                wordVie = parser.next();
                 Dictionary.dictionary[dictIndex] = new Word(wordEn, wordVie);
 //                System.out.println(wordEn + " " + wordVie);
                 ++dictIndex;    // Increase the index of the Word array
