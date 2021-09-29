@@ -6,8 +6,6 @@ import java.io.*;
 import java.util.Scanner;
 
 public class DictionaryManagement {
-
-
     /** Methods. */
     /* Insert From Command Line */
     void insertFromCommandline() {
