@@ -1,15 +1,19 @@
-/**
- * DictionaryManagement class - To insert new words to the dictionary from the CLI (command line interface).
- * More features (not bugs) will be implemented in the near future.
- */
 import java.io.*;
 import java.util.Scanner;
 
 public class DictionaryManagement {
 
-    Character dictionary = new Character(' ', "");
-    int numberOfWords = 0;
-    /** Methods. *///-------------------------------------------------------------------------------------------------------------//
+    /**
+     * DictionaryManagement class - To insert new words to the dictionary from the CLI (command line interface).
+     * More features (not bugs) will be implemented in the near future.
+     */
+
+    //-----------------------------------------------------------------------------------------------------------------------------//
+
+    Character dictionary = new Character(' ', "");      // init the dictionary.
+    int numberOfWords = 0;                                              // number of words in dictionary.
+
+    //-----------------------------------------------------------------------------------------------------------------------------//
 
     /* Insert From Command Line */
     void insertFromCommandline() {
@@ -69,7 +73,7 @@ public class DictionaryManagement {
             File dictionaryFile = new File("src/dictionaries.txt");
 
             // Number of Lines in file = Number of Words
-            numberOfWords = numberOfLines(dictionaryFile);
+            numberOfWords = HelperMethod.numberOfLines(dictionaryFile);
 
             // Read file
             sc = new Scanner(dictionaryFile);
@@ -82,7 +86,7 @@ public class DictionaryManagement {
 
                 wordEng = parser.next();
                 wordVie = parser.next();
-//                Dictionary.dictionary[dictIndex] = new Word(wordEng, wordVie);
+            //  Dictionary.dictionary[dictIndex] = new Word(wordEng, wordVie);
 
                 dictionary.addWord(wordEng, wordVie);
                 ++dictIndex;    // Increase the index of the Word array
@@ -91,49 +95,21 @@ public class DictionaryManagement {
             // Close file (automated???)
         } catch (IOException e) {
             System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
-//            e.printStackTrace();  for debugging
+            // e.printStackTrace();  for debugging
         }
     }
 
-    static int numberOfLines(File file) throws IOException {
-        FileReader readFile = new FileReader(file);
-        LineNumberReader lineNumberReader = new LineNumberReader(readFile);
-
-        int lineNumber = 0;
-        while (lineNumberReader.readLine() != null) {
-            lineNumber++;
-        }
-        return lineNumber;
-    }
+    //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Testing methods.
+     * Method print all word to cmd in order.
      */
     void showAllWords() {
         /* Message's length:012345678901234567890123456789*/
         System.out.println("NO   | English    | Vietnamese");
-
         /* Print out the English word and its Vietnamese translation */
-        int a = dictionary.printAll("", 0);
+        int a = dictionary.printAll("", 0, 0);
     }
 
-    public static void main(String[] args) {
-        Character test = new Character(' ', "");
-        test.addWord("axe", "riu" );
-        test.addWord("godgame", "tham tro choi" );
-        test.addWord("god", "tham" );
-        test.addWord("male", "nam" );
-        test.addWord("female", "nu" );
-        test.addWord("ass", "mong" );
-        test.addWord("astroid", "thien thach" );
-        test.addWord("as", "như là" );
-        test.addWord("adudu", "adudu" );
-        test.addWord("godfalse", "than sai cmnr" );
-        test.addWord("godfall", "rot than" );
-        test.addWord("goofy", "goofy" );
-        test.printAll("", 0);
-        System.out.println(test.searchWord("as"));
-    }
-
-
+    //----------------------------------------------------------------------------------------------------------------------------------//
 }

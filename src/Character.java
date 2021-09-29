@@ -1,5 +1,13 @@
 public class Character {
 
+    /**
+     * Character Class
+     * each Character is a branch of tree, has another or root as father and other branches as sons.
+     * Each branch contain char and mean at that branch.
+     */
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
     private char character;                     //the character of the branch
     private String mean;                        //meaning of the word of that branch
     public Character[] afterChar = {};          //branches of this branch
@@ -7,7 +15,7 @@ public class Character {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * geter and seter
+     * getter and setter
      */
 
     void setCharacter(char c) {
@@ -39,7 +47,7 @@ public class Character {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * add a branch at right order
+     * add a Character to present branch.
      */
     void addChar(Character newChar) {
         Character[] tmpArr = new Character[afterChar.length + 1];
@@ -57,6 +65,9 @@ public class Character {
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
+    /**
+     * Find a Character in this branch, return -1 if not found.
+     */
     int findChar(char ch) {
         int loc = -1;
         if (this.afterChar.length > 0) {
@@ -72,7 +83,7 @@ public class Character {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Recursive method to input a word and ít meaning into the tree
+     * Recursive method to input a word and ít meaning into the tree.
      */
     void addWord(String engWord, String vieWord) {
         char ch = engWord.charAt(0);
@@ -99,7 +110,8 @@ public class Character {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * search a word and return ít meaning
+     * Recursive method to search a word and return ít meaning.
+     * return "we cant find it" if there's no word.
      */
     String searchWord(String inputWord) {
         String noFound = "we cant find it";
@@ -119,17 +131,25 @@ public class Character {
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
-    int printAll(String wordForm, int index) {
+    /**
+     * Recursive method to print all the word include number and mean in dictionary in order.
+     * flag 0 to pritn to cmd.
+     * flag 1 to print to visual app. (not yet)
+     * return number of word in that branch.
+     */
+    int printAll(String wordForm, int index, int flag) {
         wordForm += getCharacter();
 
         if (getMean() != "") {
-            index += 1;
-            String formattedWord = HelperMethod.formatString(index, wordForm, getMean());
-            System.out.println(formattedWord);
+            if (flag == 0) {
+                index += 1;
+                HelperMethod.formatStringAndPrint(index, wordForm, getMean());
+            } else {
+            }
         }
         if (afterChar.length != 0) {
             for (int i = 0; i < afterChar.length; i++) {
-                index = afterChar[i].printAll(wordForm, index);
+                index = afterChar[i].printAll(wordForm, index, flag);
             }
         }
         return index;
@@ -137,6 +157,10 @@ public class Character {
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
+    /**
+     * Recursive method to print all branch in a tree-style look.
+     * for test and debug only.
+     */
     void printChar() {
         System.out.print(getCharacter() + " ");
         System.out.print("(");
