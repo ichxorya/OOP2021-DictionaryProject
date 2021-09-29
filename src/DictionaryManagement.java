@@ -1,21 +1,9 @@
 import java.util.Scanner;
 
 public class DictionaryManagement {
-    /**
-     * DictionaryManagement class - To insert new words to the dictionary from the CLI (command line interface).
-     * More features (not bugs) will be implemented in the near future.
-     */
 
-
-    /**
-     * Variables.
-     */
-    static Dictionary book;
-    Scanner sc = new Scanner(System.in);    // Using scanner to receive user inputs.
-
-    /**
-     * Methods.
-     */
+    static Character book;
+    Scanner sc = new Scanner(System.in);
 
     void insertFromCommandline() {
         /* Variables */
@@ -31,9 +19,8 @@ public class DictionaryManagement {
             System.out.print("(Input a positive number): ");
             numberOfWord = sc.nextInt();    // After using sc.nextInt(), we have to flush (?) the input stream
         }
-        autoFlush = sc.nextLine();          // Flushed!
+        autoFlush = sc.nextLine();          // Flushed!             Bruh!:D
 
-        book.dictionary = new Word[numberOfWord];
         while (numberOfWord > 0) {
             System.out.println("Input the English word and its Vietnamese translation: ");
             wordEn = sc.nextLine();
@@ -50,10 +37,13 @@ public class DictionaryManagement {
             }
 
             /* Added to the dictionary */
-            book.dictionary[dictIndex] = new Word(wordEn, wordVie);
+            ///////////////////////////////
 
             ++dictIndex;    // Increase the index of the Word array
             --numberOfWord; // Reduce the number of Word in the queue by 1
         }
+    }
+    public static void main(String[] args) {
+        DictionaryManagement test = new DictionaryManagement();
     }
 }
