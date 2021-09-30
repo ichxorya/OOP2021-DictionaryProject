@@ -12,6 +12,9 @@ public class DictionaryCommandline {
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
+    /**
+     * input from cmd, txt file and print all.
+     */
     void dictionaryBasic() {
         cliDictionary.insertFromCommandline();
         cliDictionary.insertFromFile();
@@ -20,9 +23,19 @@ public class DictionaryCommandline {
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
+    /**
+     * input from file and search.
+     */
+    void dictionaryAdvanced() {
+        cliDictionary.insertFromFile();
+        cliDictionary.searchFromCommandLine();
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
     public static void main(String[] args) {
         DictionaryCommandline test = new DictionaryCommandline();
-        test.dictionaryBasic();
+        test.dictionaryAdvanced();
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//

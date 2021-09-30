@@ -62,8 +62,6 @@ public class DictionaryManagement {
     void insertFromFile() {
         Scanner sc;    // Using scanner to receive data from external file.
         Scanner parser;    // Using scanner to parse strings from external file.
-        int numberOfWords;
-        int dictIndex = 0;
         String wordEng;
         String wordVie;
         String readLine;
@@ -79,23 +77,39 @@ public class DictionaryManagement {
             sc = new Scanner(dictionaryFile);
 
             // Imply that the input file is P E R F E C T
-            while (sc.hasNextLine() && dictIndex < numberOfWords) {
+            while (sc.hasNextLine()) {
                 readLine = sc.nextLine();
                 parser = new Scanner(readLine);
                 parser.useDelimiter("\t");
 
                 wordEng = parser.next();
                 wordVie = parser.next();
-            //  Dictionary.dictionary[dictIndex] = new Word(wordEng, wordVie);
 
+                //input
                 dictionary.addWord(wordEng, wordVie);
-                ++dictIndex;    // Increase the index of the Word array
             }
 
             // Close file (automated???)
         } catch (IOException e) {
             System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
             // e.printStackTrace();  for debugging
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Run if user want to search a word or search from a part.
+     */
+    void searchFromCommandLine() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Do you want to search a word or search from a part? 'w' for word and 'p' for part: ");
+        if (sc.nextLine() == "w") {
+            System.out.println("Please write the word you want to search: ");
+            dictionaryLookedUp(sc.nextLine());
+        } else {
+            System.out.println("Please write the part you want to search: ");
+            dictionarySearcher(sc.nextLine());
         }
     }
 
@@ -109,6 +123,37 @@ public class DictionaryManagement {
         System.out.println("NO   | English    | Vietnamese");
         /* Print out the English word and its Vietnamese translation */
         int a = dictionary.printAll("", 0, 0);
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * print all the word with the beginning is part and meaning.
+     */
+    void dictionarySearcher(String part) {
+        Character fWord = dictionary.searchPart(part);
+        if (fWord.getCharacter() == dictionary.getCharacter()) {
+            System.out.println("No word found!");
+        } else {
+            System.out.println("Word have the same past you are searching for");
+            System.out.println("NO   | English    | Vietnamese");
+            fWord.printAll(part.substring(0,part.length() - 1), 0, 0);
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * print the word user want and meaning.
+     */
+    void dictionaryLookedUp(String word) {
+        String pWord = dictionary.searchWord(word);
+        if (pWord == "No word found!") {
+            System.out.println(pWord);
+        } else {
+            System.out.println("The word you are searching for: ");
+            System.out.println(word  + " has the meaning: " + pWord);
+        }
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//

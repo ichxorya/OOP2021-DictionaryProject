@@ -132,6 +132,26 @@ public class Character {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
+     * Recursive method to search the branch of the last char of word
+     */
+    Character searchPart(String part) {
+        char ch = part.charAt(0);
+
+        for (int i = 0; i < afterChar.length; i++) {
+            if (afterChar[i].getCharacter() == ch) {
+                if (part.length() == 1) {
+                    return afterChar[i];
+                } else {
+                    return afterChar[i].searchPart(part.substring(1, part.length()));
+                }
+            }
+        }
+        return new Character(' ', "");
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
      * Recursive method to print all the word include number and mean in dictionary in order.
      * flag 0 to pritn to cmd.
      * flag 1 to print to visual app. (not yet)
