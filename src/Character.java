@@ -1,53 +1,60 @@
 public class Character {
 
     /**
-     * Character Class
-     * each Character is a branch of tree, has another or root as father and other branches as sons.
-     * Each branch contain char and mean at that branch.
+     * Character Class.
+     * (should be mentioned as *Character*)
+     *
+     * 1. Each Character object is a branch of a *tree*
+     *    It can be the root, or the parent of other children branches.
+     *
+     * 2. Each branch contains a character and their meaning at that branch.
+     *    For example: D: Chữ D
+     *                 -> O: Làm
+     *                    -> G: Con chó
      */
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
-    private char character;                     //the character of the branch
-    private String mean;                        //meaning of the word of that branch
-    public Character[] afterChar = {};          //branches of this branch
+    private char character;                     // The character of the branch
+    private String meaning;                     // Meaning of the word of that branch
+    public Character[] afterChar = {};          // Sub-branches of this branch
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * getter and setter
+     * Getters and Setters.
      */
 
-    void setCharacter(char c) {
-        character = c;
+    void setCharacter(char character) {
+        this.character = character;
     }
 
-    void setMean(String m) {
-        mean = m;
+    void setMeaning(String meaning) {
+        this.meaning = meaning;
     }
 
     char getCharacter() {
         return character;
     }
 
-    String getMean() {
-        return mean;
+    String getMeaning() {
+        return meaning;
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * constructor
+     * Constructor.
      */
-    Character(char inputChar, String inMean) {
+    Character(char inputChar, String inputMeaning) {
         setCharacter(inputChar);
-        setMean(inMean);
+        setMeaning(inputMeaning);
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * add a Character to present branch.
+     * Add a *Character* to the present branch.
      */
     void addChar(Character newChar) {
         Character[] tmpArr = new Character[afterChar.length + 1];
@@ -66,7 +73,7 @@ public class Character {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Find a Character in this branch, return -1 if not found.
+     * Find a *Character* in this branch, return -1 if not found.
      */
     int findChar(char ch) {
         int loc = -1;
@@ -100,7 +107,7 @@ public class Character {
             }
         } else {
             if (engWord.length() == 1) {
-                this.afterChar[loc].setMean(vieWord);
+                this.afterChar[loc].setMeaning(vieWord);
             } else {
                 this.afterChar[loc].addWord(engWord.substring(1, engWord.length()), vieWord);
             }
@@ -111,16 +118,16 @@ public class Character {
 
     /**
      * Recursive method to search a word and return ít meaning.
-     * return "we cant find it" if there's no word.
+     * return "We can't find it" if there's no word.
      */
     String searchWord(String inputWord) {
-        String noFound = "we cant find it";
+        String noFound = "We can't find it";
         char ch = inputWord.charAt(0);
 
         for (int i = 0; i < afterChar.length; i++) {
             if (afterChar[i].getCharacter() == ch) {
                 if (inputWord.length() == 1) {
-                    return afterChar[i].getMean();
+                    return afterChar[i].getMeaning();
                 } else {
                     return afterChar[i].searchWord(inputWord.substring(1, inputWord.length()));
                 }
@@ -152,18 +159,18 @@ public class Character {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Recursive method to print all the word include number and mean in dictionary in order.
-     * flag 0 to pritn to cmd.
+     * Recursive method to print all the word include number and meaning in dictionary in order.
+     * flag 0 to print to cmd.
      * flag 1 to print to visual app. (not yet)
      * return number of word in that branch.
      */
     int printAll(String wordForm, int index, int flag) {
         wordForm += getCharacter();
 
-        if (getMean() != "") {
+        if (getMeaning() != "") {
             if (flag == 0) {
                 index += 1;
-                HelperMethod.formatStringAndPrint(index, wordForm, getMean());
+                HelperMethod.formatStringAndPrint(index, wordForm, getMeaning());
             } else {
             }
         }
