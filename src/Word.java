@@ -1,7 +1,9 @@
-/**
- * Word class - Contains an English word and its Vietnamese explanation.
- */
 public class Word {
+
+    /**
+     * Word class - Contains an English word and its Vietnamese explanation.
+     */
+
     /** Variables. */
     private String word_target;     // English
     private String word_explain;    // Vietnamese

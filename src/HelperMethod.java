@@ -6,7 +6,7 @@ import java.io.LineNumberReader;
 public class HelperMethod {
 
     /**
-      A class contain method that not classified but we need it.
+     * A class contain method that not classified (but we need it).
      */
 
     //----------------------------------------------------------------------------------------------------------------------------------//

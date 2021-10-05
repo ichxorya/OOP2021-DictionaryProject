@@ -1,8 +1,8 @@
 public class Character {
 
     /**
-     * Character Class.
-     * (should be mentioned as *Character*)
+     * Character class.
+     * (Should be mentioned as *Character*).
      *
      * 1. Each Character object is a branch of a *tree*
      *    It can be the root, or the parent of other children branches.

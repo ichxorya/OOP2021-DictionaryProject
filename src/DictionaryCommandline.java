@@ -3,19 +3,22 @@ import java.util.Dictionary;
 public class DictionaryCommandline {
 
     /**
-     * DictionaryCommandline class - Main class for cmd user.
+     * DictionaryCommandline class.
+     * (Main class for CLI (Command Line Interface) users).
      */
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
-    DictionaryManagement cliDictionary = new DictionaryManagement();   // init a dictionary management to use.
+    DictionaryManagement cliDictionary = new DictionaryManagement();   // Init a dictionary management to use.
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * input from cmd, txt file and print all.
+     * Input from cmd, txt file and print all.
+     * Obsolete method, use dictionaryAdvanced() instead.
      */
-    void dictionaryBasic() {
+    @Deprecated
+     void dictionaryBasic() {
         cliDictionary.insertFromCommandline();
         cliDictionary.insertFromFile();
         cliDictionary.showAllWords();
@@ -24,7 +27,7 @@ public class DictionaryCommandline {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * input from file and search.
+     * Input from file and search.
      */
     void dictionaryAdvanced() {
         cliDictionary.insertFromFile();
@@ -32,6 +35,10 @@ public class DictionaryCommandline {
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Main method.
+     */
 
     public static void main(String[] args) {
         DictionaryCommandline test = new DictionaryCommandline();
