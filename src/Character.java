@@ -12,7 +12,7 @@
  */
 
 public class Character {
-    
+
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     private char character;                     // The character of the branch
@@ -170,7 +170,7 @@ public class Character {
         if (getMeaning() != "") {
             if (flag == 0) {
                 index += 1;
-                HelperMethod.formatStringAndPrint(index, wordForm, getMeaning());
+                DictionaryUtilities.formatStringAndPrint(index, wordForm, getMeaning());
             } else {
             }
         }

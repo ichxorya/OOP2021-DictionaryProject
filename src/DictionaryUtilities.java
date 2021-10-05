@@ -5,36 +5,43 @@ import java.io.LineNumberReader;
 
 /**
  * A class contain method that not classified (but we need it).
+ * (Renamed from HelperMethod to DictionaryUtilities)
  */
 
-public class HelperMethod {
+public class DictionaryUtilities {
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * a method to make output look better like this:
+     * A method to make the output look better like this:
      * no     |  engWord       |  vieWord
-     * amd then print output.
+     *
+     * And then print the output.
      */
+
     static void formatStringAndPrint(int index, String firstWord, String secondWord) {
         /* Space-padding */
-        String indexStr = index + "";
+        String indexStr = index + "";   // Convert the index (int) to String
         firstWord = "| " + firstWord;
         secondWord = "| " + secondWord;
+
         while (indexStr.length() < 5) {
             indexStr += ' ';
         }
+
         while ((indexStr + firstWord).length() < 18) {
             firstWord += ' ';
         }
+
         System.out.println(indexStr + firstWord + secondWord);
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * I dont know wtf is this but we need it.
+     * A method to count the number of lines (of a file).
      */
+
     static int numberOfLines(File file) throws IOException {
         FileReader readFile = new FileReader(file);
         LineNumberReader lineNumberReader = new LineNumberReader(readFile);

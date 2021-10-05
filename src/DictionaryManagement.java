@@ -73,7 +73,7 @@ public class DictionaryManagement {
             File dictionaryFile = new File("src/dictionaries.txt");
 
             // Number of Lines in file = Number of Words
-            numberOfWords = HelperMethod.numberOfLines(dictionaryFile);
+            numberOfWords = DictionaryUtilities.numberOfLines(dictionaryFile);
 
             // Read file
             sc = new Scanner(dictionaryFile);
