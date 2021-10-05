@@ -13,10 +13,12 @@ public class DictionaryUtilities {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * A method to make the output look better like this:
-     * no     |  engWord       |  vieWord
+     * Make the output look like this:
      *
-     * And then print the output.
+     * Example:
+     * NO   | English    | Vietnamese
+     * 1    | FLower     | Hoa
+     * 2    | Chicken    | Con gà
      */
 
     static void formatStringAndPrint(int index, String firstWord, String secondWord) {
@@ -39,7 +41,7 @@ public class DictionaryUtilities {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * A method to count the number of lines (of a file).
+     * Count the number of lines (of a file).
      */
 
     static int numberOfLines(File file) throws IOException {

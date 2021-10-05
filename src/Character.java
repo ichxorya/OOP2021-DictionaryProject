@@ -24,7 +24,6 @@ public class Character {
     /**
      * Getters and Setters.
      */
-
     void setCharacter(char character) {
         this.character = character;
     }

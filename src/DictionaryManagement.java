@@ -4,7 +4,9 @@ import java.util.Scanner;
 /**
  * DictionaryManagement class.
  *
- * To insert new words to the dictionary from the CLI (Command Line Interface).
+ * Features:
+ * - TOO LAZY TO UPDATE LM*O.
+ *
  * (More features (not bugs) will be implemented in the near future).
  */
 
@@ -12,17 +14,19 @@ public class DictionaryManagement {
 
     //-----------------------------------------------------------------------------------------------------------------------------//
 
-    Character dictionary = new Character(' ', "");      // init the dictionary.
-    int numberOfWords = 0;                                              // number of words in dictionary.
+    Character dictionary = new Character(' ', "");      // Init the dictionary.
+    int numberOfWords = 0;                                              // Number of words in dictionary.
 
     //-----------------------------------------------------------------------------------------------------------------------------//
 
-    /* Insert From Command Line */
+    /**
+     * Insert from Command Line.
+     */
+
     void insertFromCommandline() {
         /* Variables */
         Scanner sc = new Scanner(System.in);    // Using scanner to receive user inputs.
         numberOfWords = -1;
-        int dictIndex = 0;
         String wordEng;
         String wordVie;
 
@@ -50,10 +54,9 @@ public class DictionaryManagement {
                 wordVie = sc.nextLine();
             }
 
-            /* Added to the WHAT??? */
+            /* Added to the dictionary */
             dictionary.addWord(wordEng, wordVie);
 
-            ++dictIndex;    // Increase the index of the Word array
             --numberOfWords; // Reduce the number of Word in the queue by 1
         }
     }
@@ -101,14 +104,14 @@ public class DictionaryManagement {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Run if user want to search a word or search from a part.
+     * Run if the user want to search for a word or search from a part.
      */
     void searchFromCommandLine() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Do you want to search a word or search from a part? 'w' for word and 'p' for part: ");
-        if (sc.nextLine() == "w") {
+        System.out.println("Do you want to search for a word or search from a part? 'w' for word and 'p' for part: ");
+        if (sc.nextLine().equals("w")) {
             System.out.println("Please write the word you want to search: ");
-            dictionaryLookedUp(sc.nextLine());
+            dictionaryLookUp(sc.nextLine());
         } else {
             System.out.println("Please write the part you want to search: ");
             dictionarySearcher(sc.nextLine());
@@ -118,10 +121,10 @@ public class DictionaryManagement {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Method print all word to cmd in order.
+     * Print all words to the Command Line Interface in order.
      */
     void showAllWords() {
-        /* Message's length:012345678901234567890123456789*/
+        /* Message's length:012345678901234567890123456789 */
         System.out.println("NO   | English    | Vietnamese");
         /* Print out the English word and its Vietnamese translation */
         int a = dictionary.printAll("", 0, 0);
@@ -130,7 +133,7 @@ public class DictionaryManagement {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * print all the word with the beginning is part and meaning.
+     * Print all the word with the beginning is part and meaning.
      */
     void dictionarySearcher(String part) {
         Character fWord = dictionary.searchPart(part);
@@ -146,11 +149,11 @@ public class DictionaryManagement {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * print the word user want and meaning.
+     * Print the word user want and meaning.
      */
-    void dictionaryLookedUp(String word) {
+    void dictionaryLookUp(String word) {
         String pWord = dictionary.searchWord(word);
-        if (pWord == "No word found!") {
+        if (pWord.equals("No word found!")) {
             System.out.println(pWord);
         } else {
             System.out.println("The word you are searching for: ");

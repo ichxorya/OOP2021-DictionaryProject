@@ -39,7 +39,6 @@ public class DictionaryCommandline {
     /**
      * Main method.
      */
-
     public static void main(String[] args) {
         DictionaryCommandline test = new DictionaryCommandline();
         test.dictionaryAdvanced();
