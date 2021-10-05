@@ -1,8 +1,9 @@
+/**
+ * Word class - Contains an English word and its Vietnamese explanation.
+ * Obsolete class, use Character instead.
+ */
+@Deprecated
 public class Word {
-
-    /**
-     * Word class - Contains an English word and its Vietnamese explanation.
-     */
 
     /** Variables. */
     private String word_target;     // English

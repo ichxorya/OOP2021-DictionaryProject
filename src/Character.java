@@ -1,18 +1,18 @@
+/**
+ * Character class.
+ * (Should be mentioned as *Character*).
+ *
+ * 1. Each Character object is a branch of a *tree*
+ *    It can be the root, or the parent of other children branches.
+ *
+ * 2. Each branch contains a character and their meaning at that branch.
+ *    For example: D: Chữ D
+ *                 -> O: Làm
+ *                    -> G: Con chó
+ */
+
 public class Character {
-
-    /**
-     * Character class.
-     * (Should be mentioned as *Character*).
-     *
-     * 1. Each Character object is a branch of a *tree*
-     *    It can be the root, or the parent of other children branches.
-     *
-     * 2. Each branch contains a character and their meaning at that branch.
-     *    For example: D: Chữ D
-     *                 -> O: Làm
-     *                    -> G: Con chó
-     */
-
+    
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     private char character;                     // The character of the branch

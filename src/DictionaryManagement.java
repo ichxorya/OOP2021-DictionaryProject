@@ -1,14 +1,14 @@
 import java.io.*;
 import java.util.Scanner;
 
-public class DictionaryManagement {
+/**
+ * DictionaryManagement class.
+ *
+ * To insert new words to the dictionary from the CLI (Command Line Interface).
+ * (More features (not bugs) will be implemented in the near future).
+ */
 
-    /**
-     * DictionaryManagement class.
-     *
-     * To insert new words to the dictionary from the CLI (Command Line Interface).
-     * (More features (not bugs) will be implemented in the near future).
-     */
+public class DictionaryManagement {
 
     //-----------------------------------------------------------------------------------------------------------------------------//
 

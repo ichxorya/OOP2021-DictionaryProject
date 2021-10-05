@@ -1,11 +1,11 @@
 import java.util.Dictionary;
 
-public class DictionaryCommandline {
+/**
+ * DictionaryCommandline class.
+ * (Main class for CLI (Command Line Interface) users).
+ */
 
-    /**
-     * DictionaryCommandline class.
-     * (Main class for CLI (Command Line Interface) users).
-     */
+public class DictionaryCommandline {
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
