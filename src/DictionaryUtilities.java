@@ -20,7 +20,6 @@ public class DictionaryUtilities {
      * 1    | FLower     | Hoa
      * 2    | Chicken    | Con gà
      */
-
     static void formatStringAndPrint(int index, String firstWord, String secondWord) {
         /* Space-padding */
         String indexStr = index + "";   // Convert the index (int) to String
@@ -43,7 +42,6 @@ public class DictionaryUtilities {
     /**
      * Count the number of lines (of a file).
      */
-
     static int numberOfLines(File file) throws IOException {
         FileReader readFile = new FileReader(file);
         LineNumberReader lineNumberReader = new LineNumberReader(readFile);

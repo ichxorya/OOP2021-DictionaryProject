@@ -142,7 +142,7 @@ public class DictionaryManagement {
         } else {
             System.out.println("Word have the same past you are searching for");
             System.out.println("NO   | English    | Vietnamese");
-            fWord.printAll(part.substring(0,part.length() - 1), 0, 0);
+            fWord.printAll(part.substring(0, part.length() - 1), 0, 0);
         }
     }
 
