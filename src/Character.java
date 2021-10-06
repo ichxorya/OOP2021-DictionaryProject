@@ -56,12 +56,22 @@ public class Character {
      * Add a *Character* to the present branch.
      */
     void addChar(Character newChar) {
+        /* Create a new larger array of *Character* */
         Character[] tmpArr = new Character[afterChar.length + 1];
+
+        /* Using arraycopy to copy the afterChar array to the new array */
         System.arraycopy(afterChar, 0, tmpArr, 0, afterChar.length);
+        /* Fill the last element of the new array with new a *Character* object */
         tmpArr[tmpArr.length - 1] = newChar;
+
+        /* Assign tmpArr to afterChar array */
         afterChar = tmpArr;
+
+        /* Sort */
         for (int i = afterChar.length - 1; i > 0; i--) {
-            if (afterChar[i].getCharacter() < afterChar[i - 1].getCharacter()) {
+            char charBack = afterChar[i].getCharacter();
+            char charFront = afterChar[i - 1].getCharacter();
+            if (charBack < charFront) {
                 Character tmp = afterChar[i];
                 afterChar[i] = afterChar[i - 1];
                 afterChar[i - 1] = tmp;

@@ -1,6 +1,6 @@
 /**
  * Word class - Contains an English word and its Vietnamese explanation.
- * Obsolete class, use Character instead.
+ * Obsolete class, use *Character* instead.
  */
 @Deprecated
 public class Word {

@@ -1,0 +1,8 @@
+1. Arraycopy()
+*) arraycopy(Object src, int srcPos, Object dest, int destPos, int length);
+
+----is the same as----
+
+*) for (int i = srcPos; i < dest.length; ++i) {
+	dest[i] = src[i];
+}
