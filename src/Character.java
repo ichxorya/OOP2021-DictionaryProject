@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Character {
 
     /**
@@ -8,9 +10,9 @@ public class Character {
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
-    private char character;                     //the character of the branch
-    private String mean;                        //meaning of the word of that branch
-    public Character[] afterChar = {};          //branches of this branch
+    private char character;                                             //the character of the branch
+    private String mean;                                                //meaning of the word of that branch
+    ArrayList<Character> afterChar = new ArrayList<Character>();        //Muahahaha evolve to ArrayList. So much better.
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
@@ -47,37 +49,19 @@ public class Character {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * add a Character to present branch.
-     */
-    void addChar(Character newChar) {
-        Character[] tmpArr = new Character[afterChar.length + 1];
-        System.arraycopy(afterChar, 0, tmpArr, 0, afterChar.length);
-        tmpArr[tmpArr.length - 1] = newChar;
-        afterChar = tmpArr;
-        for (int i = afterChar.length - 1; i > 0; i--) {
-            if (afterChar[i].getCharacter() < afterChar[i - 1].getCharacter()) {
-                Character tmp = afterChar[i];
-                afterChar[i] = afterChar[i - 1];
-                afterChar[i - 1] = tmp;
-            }
-        }
-    }
-
-    //----------------------------------------------------------------------------------------------------------------------------------//
-
-    /**
-     * Find a Character in this branch, return -1 if not found.
+     * Find a Character in this branch:
+     * - Return -1 if not found.
+     * - Return index if found.
      */
     int findChar(char ch) {
-        int loc = -1;
-        if (this.afterChar.length > 0) {
-            for (int i = 0; i < this.afterChar.length; i++) {
-                if (this.afterChar[i].getCharacter() == ch) {
-                    loc = i;
+        if (afterChar.size() > 0) {
+            for (int j = 0; j < afterChar.size(); j++) {
+                if (afterChar.get(j).getCharacter() == ch) {
+                    return j;
                 }
             }
         }
-        return loc;
+        return -1;
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
@@ -92,37 +76,86 @@ public class Character {
 
         if (loc == -1) {
             if (engWord.length() == 1) {
-                this.addChar(new Character(ch, vieWord));
+                this.afterChar.add(new Character(ch, vieWord));
             } else {
-                this.addChar(new Character(ch, ""));
-                loc = findChar(ch);
-                this.afterChar[loc].addWord(engWord.substring(1, engWord.length()), vieWord);
+                this.afterChar.add(new Character(ch, ""));
+                this.afterChar.get(this.afterChar.size() - 1).addWord(engWord.substring(1, engWord.length()), vieWord);
             }
         } else {
             if (engWord.length() == 1) {
-                this.afterChar[loc].setMean(vieWord);
+                this.afterChar.get(loc).setMean(vieWord);
             } else {
-                this.afterChar[loc].addWord(engWord.substring(1, engWord.length()), vieWord);
+                this.afterChar.get(loc).addWord(engWord.substring(1, engWord.length()), vieWord);
             }
         }
+        HelperMethod.ArrSort(this);
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Recursive method to delete a word and ít meaning from the tree.
+     * Return "This word in not exist!" if not exist.
+     */
+    String deleteWord(String inputWord) {
+        char ch = inputWord.charAt(0);
+
+        for (int i = 0; i < afterChar.size(); i++) {
+            if (afterChar.get(i).getCharacter() == ch) {
+                if (inputWord.length() == 1) {
+                    afterChar.remove(i);
+                    return "Found and deleted!";
+                } else {
+                    String res =  afterChar.get(i).deleteWord(inputWord.substring(1, inputWord.length()));
+                    if (res.equals("Found and deleted!") && afterChar.get(i).afterChar.size() == 0) {
+                        afterChar.remove(i);
+                    }
+                    return res;
+                }
+            }
+        }
+        return "This word in not exist!";
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Recursive method to change meaning of a word in the tree.
+     * return "we can't find it" if there's no word.
+     */
+    String changeMean(String inputWord, String newMean) {
+        String noFound = "We can't find it!";
+        char ch = inputWord.charAt(0);
+
+        for (int i = 0; i < afterChar.size(); i++) {
+            if (afterChar.get(i).getCharacter() == ch) {
+                if (inputWord.length() == 1) {
+                    afterChar.get(i).setMean(newMean);
+                    return afterChar.get(i).getMean();
+                } else {
+                    return afterChar.get(i).changeMean(inputWord.substring(1, inputWord.length()), newMean);
+                }
+            }
+        }
+        return noFound;
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
      * Recursive method to search a word and return ít meaning.
-     * return "we cant find it" if there's no word.
+     * return "we can't find it" if there's no word.
      */
     String searchWord(String inputWord) {
-        String noFound = "we cant find it";
+        String noFound = "We can't find it!";
         char ch = inputWord.charAt(0);
 
-        for (int i = 0; i < afterChar.length; i++) {
-            if (afterChar[i].getCharacter() == ch) {
+        for (int i = 0; i < afterChar.size(); i++) {
+            if (afterChar.get(i).getCharacter() == ch) {
                 if (inputWord.length() == 1) {
-                    return afterChar[i].getMean();
+                    return afterChar.get(i).getMean();
                 } else {
-                    return afterChar[i].searchWord(inputWord.substring(1, inputWord.length()));
+                    return afterChar.get(i).searchWord(inputWord.substring(1, inputWord.length()));
                 }
             }
         }
@@ -137,12 +170,12 @@ public class Character {
     Character searchPart(String part) {
         char ch = part.charAt(0);
 
-        for (int i = 0; i < afterChar.length; i++) {
-            if (afterChar[i].getCharacter() == ch) {
+        for (int i = 0; i < afterChar.size(); i++) {
+            if (afterChar.get(i).getCharacter() == ch) {
                 if (part.length() == 1) {
-                    return afterChar[i];
+                    return afterChar.get(i);
                 } else {
-                    return afterChar[i].searchPart(part.substring(1, part.length()));
+                    return afterChar.get(i).searchPart(part.substring(1, part.length()));
                 }
             }
         }
@@ -167,9 +200,9 @@ public class Character {
             } else {
             }
         }
-        if (afterChar.length != 0) {
-            for (int i = 0; i < afterChar.length; i++) {
-                index = afterChar[i].printAll(wordForm, index, flag);
+        if (afterChar.size() != 0) {
+            for (int i = 0; i < afterChar.size(); i++) {
+                index = afterChar.get(i).printAll(wordForm, index, flag);
             }
         }
         return index;
@@ -184,9 +217,9 @@ public class Character {
     void printChar() {
         System.out.print(getCharacter() + " ");
         System.out.print("(");
-        if (afterChar.length > 0) {
-            for (int i = 0; i < afterChar.length; i++) {
-                afterChar[i].printChar();
+        if (afterChar.size() > 0) {
+            for (int i = 0; i < afterChar.size(); i++) {
+                afterChar.get(i).printChar();
 
             }
         }

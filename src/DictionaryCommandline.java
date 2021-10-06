@@ -28,7 +28,7 @@ public class DictionaryCommandline {
      */
     void dictionaryAdvanced() {
         cliDictionary.insertFromFile();
-        cliDictionary.searchFromCommandLine();
+        cliDictionary.optionFromCommandLine();
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//

@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.util.Collections;
 
 public class HelperMethod {
 
@@ -44,6 +45,21 @@ public class HelperMethod {
             lineNumber++;
         }
         return lineNumber;
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Sort the afterChar of Character.
+     */
+    static void ArrSort(Character target) {
+        if (target.afterChar.size() > 1) {
+            for (int i = target.afterChar.size() - 1; i > 0; i--) {
+                if (target.afterChar.get(i).getCharacter() < target.afterChar.get(i - 1).getCharacter()) {
+                    Collections.swap(target.afterChar, i, i - 1);
+                }
+            }
+        }
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
