@@ -146,7 +146,7 @@ public class DictionaryManagement {
 
             System.out.println("Do you want to quit or do other option?");
             System.out.println("any key to quit or 'y' to continue:");
-            if (sc.nextLine() == "y") {
+            if (sc.nextLine().equals("y")) {
                 continue;
             }
             next = false;

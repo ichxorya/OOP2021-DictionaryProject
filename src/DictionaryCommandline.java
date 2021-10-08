@@ -16,7 +16,7 @@ public class DictionaryCommandline {
      * input from cmd, txt file and print all.
      */
     void dictionaryBasic() {
-        cliDictionary.insertFromCommandline();
+//        cliDictionary.insertFromCommandline();
         cliDictionary.insertFromFile();
         cliDictionary.showAllWords();
     }
