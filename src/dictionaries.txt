@@ -7,3 +7,14 @@ Dark	Bóng tối
 Write	Viết
 Table	Bàn
 Leg	Chân
+Life	Đời
+See	Nhìn
+Not	Không
+Save	Lưu
+Eye	Mắt
+Dry	Khô
+We	Chúng ta
+Ill	Ốm
+Wrong	Sai
+Or	Hoặc
+Right	Phải

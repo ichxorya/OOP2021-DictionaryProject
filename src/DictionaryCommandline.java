@@ -1,10 +1,10 @@
-import java.util.Dictionary;
+/**
+ * DictionaryCommandline class - Main class for cmd user.
+ */
 
 public class DictionaryCommandline {
 
-    /**
-     * DictionaryCommandline class - Main class for cmd user.
-     */
+
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
@@ -35,7 +35,7 @@ public class DictionaryCommandline {
 
     public static void main(String[] args) {
         DictionaryCommandline test = new DictionaryCommandline();
-        test.dictionaryAdvanced();
+        test.dictionaryBasic();
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//

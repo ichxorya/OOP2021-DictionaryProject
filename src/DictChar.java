@@ -1,55 +1,60 @@
 import java.util.ArrayList;
 
-public class Character {
+/**
+ * DictChar class.
+ *
+ * 1. Each DictChar object is a branch of a *tree*
+ *    It can be the root, or the parent of other child-branches.
+ *
+ * 2. Each branch contains a character and their meaning at that branch.
+ *    For example: D: Chữ D
+ *                 -> O: Làm
+ *                    -> G: Con chó
+ */
 
-    /**
-     * Character Class
-     * each Character is a branch of tree, has another or root as father and other branches as sons.
-     * Each branch contain char and mean at that branch.
-     */
+public class DictChar {
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
-    private char character;                                             //the character of the branch
-    private String mean;                                                //meaning of the word of that branch
-    ArrayList<Character> afterChar = new ArrayList<Character>();        //Muahahaha evolve to ArrayList. So much better.
+    private char character;                                             // The character of the branch
+    private String meaning;                                             // The meaning of the word of that branch
+    ArrayList<DictChar> afterChar = new ArrayList<DictChar>();          // An ArrayList of DictChar
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * getter and setter
+     * Getters and Setters.
      */
-
     void setCharacter(char c) {
         character = c;
     }
 
-    void setMean(String m) {
-        mean = m;
+    void setMeaning(String m) {
+        meaning = m;
     }
 
     char getCharacter() {
         return character;
     }
 
-    String getMean() {
-        return mean;
+    String getMeaning() {
+        return meaning;
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * constructor
+     * Constructor.
      */
-    Character(char inputChar, String inMean) {
+    DictChar(char inputChar, String inputMeaning) {
         setCharacter(inputChar);
-        setMean(inMean);
+        setMeaning(inputMeaning);
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Find a Character in this branch:
+     * Find a DictChar in this branch:
      * - Return -1 if not found.
      * - Return index if found.
      */
@@ -67,7 +72,7 @@ public class Character {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Recursive method to input a word and ít meaning into the tree.
+     * Recursive method to put a word and its meaning into the tree.
      */
     void addWord(String engWord, String vieWord) {
         char ch = engWord.charAt(0);
@@ -76,19 +81,19 @@ public class Character {
 
         if (loc == -1) {
             if (engWord.length() == 1) {
-                this.afterChar.add(new Character(ch, vieWord));
+                this.afterChar.add(new DictChar(ch, vieWord));
             } else {
-                this.afterChar.add(new Character(ch, ""));
+                this.afterChar.add(new DictChar(ch, ""));
                 this.afterChar.get(this.afterChar.size() - 1).addWord(engWord.substring(1, engWord.length()), vieWord);
             }
         } else {
             if (engWord.length() == 1) {
-                this.afterChar.get(loc).setMean(vieWord);
+                this.afterChar.get(loc).setMeaning(vieWord);
             } else {
                 this.afterChar.get(loc).addWord(engWord.substring(1, engWord.length()), vieWord);
             }
         }
-        HelperMethod.ArrSort(this);
+        DictionaryUtilities.ArrSort(this);
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
@@ -114,7 +119,7 @@ public class Character {
                 }
             }
         }
-        return "This word in not exist!";
+        return "This word does not exist!";
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
@@ -130,8 +135,8 @@ public class Character {
         for (int i = 0; i < afterChar.size(); i++) {
             if (afterChar.get(i).getCharacter() == ch) {
                 if (inputWord.length() == 1) {
-                    afterChar.get(i).setMean(newMean);
-                    return afterChar.get(i).getMean();
+                    afterChar.get(i).setMeaning(newMean);
+                    return afterChar.get(i).getMeaning();
                 } else {
                     return afterChar.get(i).changeMean(inputWord.substring(1, inputWord.length()), newMean);
                 }
@@ -153,7 +158,7 @@ public class Character {
         for (int i = 0; i < afterChar.size(); i++) {
             if (afterChar.get(i).getCharacter() == ch) {
                 if (inputWord.length() == 1) {
-                    return afterChar.get(i).getMean();
+                    return afterChar.get(i).getMeaning();
                 } else {
                     return afterChar.get(i).searchWord(inputWord.substring(1, inputWord.length()));
                 }
@@ -167,7 +172,7 @@ public class Character {
     /**
      * Recursive method to search the branch of the last char of word
      */
-    Character searchPart(String part) {
+    DictChar searchPart(String part) {
         char ch = part.charAt(0);
 
         for (int i = 0; i < afterChar.size(); i++) {
@@ -179,24 +184,24 @@ public class Character {
                 }
             }
         }
-        return new Character(' ', "");
+        return new DictChar(' ', "");
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Recursive method to print all the word include number and mean in dictionary in order.
-     * flag 0 to pritn to cmd.
+     * Recursive method to print all the word include number and meaning in dictionary in order.
+     * flag 0 to print to cmd.
      * flag 1 to print to visual app. (not yet)
      * return number of word in that branch.
      */
     int printAll(String wordForm, int index, int flag) {
         wordForm += getCharacter();
 
-        if (getMean() != "") {
+        if (getMeaning() != "") {
             if (flag == 0) {
                 index += 1;
-                HelperMethod.formatStringAndPrint(index, wordForm, getMean());
+                DictionaryUtilities.formatStringAndPrint(index, wordForm, getMeaning());
             } else {
             }
         }
@@ -220,7 +225,6 @@ public class Character {
         if (afterChar.size() > 0) {
             for (int i = 0; i < afterChar.size(); i++) {
                 afterChar.get(i).printChar();
-
             }
         }
         System.out.print(")");

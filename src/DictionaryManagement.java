@@ -10,7 +10,7 @@ public class DictionaryManagement {
 
     //-----------------------------------------------------------------------------------------------------------------------------//
 
-    Character dictionary = new Character(' ', "");      // init the dictionary.
+    DictChar dictionary = new DictChar(' ', "");      // init the dictionary.
     int numberOfWords = 0;                                              // number of words in dictionary.
 
     //-----------------------------------------------------------------------------------------------------------------------------//
@@ -71,7 +71,7 @@ public class DictionaryManagement {
             File dictionaryFile = new File("src/dictionaries.txt");
 
             // Number of Lines in file = Number of Words
-            numberOfWords = HelperMethod.numberOfLines(dictionaryFile);
+            numberOfWords = DictionaryUtilities.numberOfLines(dictionaryFile);
 
             // Read file
             sc = new Scanner(dictionaryFile);
@@ -122,26 +122,26 @@ public class DictionaryManagement {
             System.out.println("What do you want to do: ");
 
             switch (sc.nextLine()) {
-                case "sw":
+                case "sw" -> {
                     System.out.println("Please write the word you want to search: ");
                     dictionaryLookedUp(sc.nextLine());
-                    break;
-                case "sp":
+                }
+                case "sp" -> {
                     System.out.println("Please write the part you want to search: ");
                     dictionarySearcher(sc.nextLine());
-                    break;
-                case "d":
+                }
+                case "d" -> {
                     System.out.println("Please write the word you want to delete: ");
                     dictionaryDelete(sc.nextLine());
-                    break;
-                case "m":
+                }
+                case "m" -> {
                     System.out.println("Please write the word and new meaning you want to modify meaning: ");
                     dictionaryModMean(sc.nextLine(), sc.nextLine());
-                    break;
-                case "w":
+                }
+                case "w" -> {
                     System.out.println("Please write the word and new word you want to modify: ");
                     dictionaryModWord(sc.nextLine(), sc.nextLine());
-                    break;
+                }
             }
 
             System.out.println("Do you want to quit or do other option?");
@@ -156,7 +156,7 @@ public class DictionaryManagement {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Method print all word to cmd in order.
+     * Print all words in order.
      */
     void showAllWords() {
         /* Message's length:012345678901234567890123456789*/
@@ -171,7 +171,7 @@ public class DictionaryManagement {
      * Print all the word with the beginning is part and meaning.
      */
     void dictionarySearcher(String part) {
-        Character fWord = dictionary.searchPart(part);
+        DictChar fWord = dictionary.searchPart(part);
         if (fWord.getCharacter() == dictionary.getCharacter()) {
             System.out.println("No word found!");
         } else {
@@ -188,7 +188,7 @@ public class DictionaryManagement {
      */
     void dictionaryLookedUp(String word) {
         String pWord = dictionary.searchWord(word);
-        if (pWord == "We can't find it!") {
+        if (pWord.equals("We can't find it!")) {
             System.out.println(pWord);
         } else {
             System.out.println("The word you are searching for: ");
@@ -199,7 +199,7 @@ public class DictionaryManagement {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Celete the given word.
+     * Delete the given word.
      */
     void dictionaryDelete(String word) {
         System.out.println(dictionary.deleteWord(word));
@@ -211,26 +211,26 @@ public class DictionaryManagement {
      * Replace meaning of the given word.
      */
     void dictionaryModMean(String word, String newMean) {
-        String mean = dictionary.changeMean(word, newMean);
-        if (mean != "We can't find it!") {
-            System.out.println(word + " has new mean: " + mean);
+        String modifiedMeaning = dictionary.changeMean(word, newMean);
+        if (!modifiedMeaning.equals("We can't find it!")) {
+            System.out.println(word + " has new meaning: " + modifiedMeaning);
         } else {
-            System.out.println(mean);
+            System.out.println(modifiedMeaning);
         }
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Replace the word but keep meaning.
+     * Replace the word but keep its meaning.
      */
     void dictionaryModWord(String word, String newWord) {
-        String mean = dictionary.searchWord(word);
-        if (mean == "No word found!") {
-            System.out.println(mean);
+        String modifiedWord = dictionary.searchWord(word);
+        if (modifiedWord.equals("No word found!")) {
+            System.out.println(modifiedWord);
         } else {
             dictionary.deleteWord(word);
-            dictionary.addWord(newWord, mean);
+            dictionary.addWord(newWord, modifiedWord);
             System.out.println(word + " has bean change to " + newWord);
         }
     }

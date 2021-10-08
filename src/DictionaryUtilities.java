@@ -4,20 +4,39 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.util.Collections;
 
-public class HelperMethod {
+/**
+ * DictionaryUtilities class.
+ *
+ * Contains utility methods for other classes.
+ */
 
-    /**
-      A class contain method that not classified but we need it.
-     */
+public class DictionaryUtilities {
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * a method to make output look better like this:
-     * no     |  engWord       |  vieWord
-     * amd then print output.
+     * Reformat the output strings then print them out.
+     *
+     * Example:
+     * NO   | English    | Vietnamese
+     * 1    | Pig        | Lợn
+     * 2    | Uncle      | Chú
+     * 3    | Zoo        | Vườn thú
      */
     static void formatStringAndPrint(int index, String firstWord, String secondWord) {
+        /* Space-padding */
+        String indexStr = index + "";
+        firstWord = "|" + firstWord;
+        secondWord = "| " + secondWord;
+
+        indexStr = String.format("%" + 5 + "s", indexStr);
+        firstWord = String.format("%" + (-13) + "s", firstWord);
+        System.out.println(indexStr + firstWord + secondWord);
+    }
+
+    @Deprecated
+    /* Replaced with more efficient method. */
+    static void formatStringAndPrint_Old(int index, String firstWord, String secondWord) {
         /* Space-padding */
         String indexStr = index + "";
         firstWord = "| " + firstWord;
@@ -34,7 +53,7 @@ public class HelperMethod {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * I dont know wtf is this but we need it.
+     * Count the number of lines of a file.
      */
     static int numberOfLines(File file) throws IOException {
         FileReader readFile = new FileReader(file);
@@ -50,9 +69,9 @@ public class HelperMethod {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Sort the afterChar of Character.
+     * Sort the afterChar of DictChar.
      */
-    static void ArrSort(Character target) {
+    static void ArrSort(DictChar target) {
         if (target.afterChar.size() > 1) {
             for (int i = target.afterChar.size() - 1; i > 0; i--) {
                 if (target.afterChar.get(i).getCharacter() < target.afterChar.get(i - 1).getCharacter()) {
