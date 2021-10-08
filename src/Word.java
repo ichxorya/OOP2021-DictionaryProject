@@ -1,5 +1,7 @@
 /**
- * Word class - Contains an English word and its Vietnamese explanation.
+ * Word class.
+ *
+ * Contains an English word and its Vietnamese explanation.
  * Obsolete class, use DictChar instead.
  */
 @Deprecated

@@ -1,64 +1,33 @@
 import java.io.*;
 import java.util.Scanner;
 
-public class DictionaryManagement {
+/**
+ * DictionaryManagement class.
+ *
+ * Features:
+ * -Insert words from a text file or command line.
+ * -Remove words from the dictionary.
+ * -Find words (full/partial).
+ * -Modify words/meanings.
+ * -Show all words.
+ *
+ * More features (not bugs) will be implemented in the near future.
+ * !!!!!!!!!
+ * dictionaryExportToFile()
+ * !!!!!!!!
+ */
 
-    /**
-     * DictionaryManagement class - To insert new words to the dictionary from the CLI (command line interface).
-     * More features (not bugs) will be implemented in the near future.
-     */
+public class DictionaryManagement {
 
     //-----------------------------------------------------------------------------------------------------------------------------//
 
     DictChar dictionary = new DictChar(' ', "");      // init the dictionary.
-    int numberOfWords = 0;                                              // number of words in dictionary.
 
     //-----------------------------------------------------------------------------------------------------------------------------//
 
-    /* Insert From Command Line */
-    void insertFromCommandline() {
-        /* Variables */
-        Scanner sc = new Scanner(System.in);    // Using scanner to receive user inputs.
-        numberOfWords = -1;
-        int dictIndex = 0;
-        String wordEng;
-        String wordVie;
-
-        /* Input */
-        while (numberOfWords <= 0) {
-            System.out.println("How many words are there?");
-            System.out.print("(Input a positive number): ");
-            numberOfWords = sc.nextInt();    // After using sc.nextInt(), we have to flush (?) the input stream
-        }
-        // Flushed!
-        String autoFlush = sc.nextLine();   // Important variable meow~~
-
-        while (numberOfWords > 0) {
-            System.out.println("Input the English word and its Vietnamese translation: ");
-            wordEng = sc.nextLine();
-            wordVie = sc.nextLine();
-
-            /* Non-empty check */
-            while (wordEng.equals("")) {
-                System.out.println("<!> Re-input the English word <!>");
-                wordEng = sc.nextLine();
-            }
-            while (wordVie.equals("")) {
-                System.out.println("<!> Re-input the Vietnamese translation <!>");
-                wordVie = sc.nextLine();
-            }
-
-            /* Added to the WHAT??? */
-            dictionary.addWord(wordEng, wordVie);
-
-            ++dictIndex;    // Increase the index of the Word array
-            --numberOfWords; // Reduce the number of Word in the queue by 1
-        }
-    }
-
-    //----------------------------------------------------------------------------------------------------------------------------------//
-
-    /* Insert From File */
+    /**
+     * Insert from File.
+     */
     void insertFromFile() {
         Scanner sc;    // Using scanner to receive data from external file.
         Scanner parser;    // Using scanner to parse strings from external file.
@@ -69,9 +38,6 @@ public class DictionaryManagement {
         try {
             // Open file
             File dictionaryFile = new File("src/dictionaries.txt");
-
-            // Number of Lines in file = Number of Words
-            numberOfWords = DictionaryUtilities.numberOfLines(dictionaryFile);
 
             // Read file
             sc = new Scanner(dictionaryFile);
@@ -85,11 +51,9 @@ public class DictionaryManagement {
                 wordEng = parser.next();
                 wordVie = parser.next();
 
-                //input
+                //Input
                 dictionary.addWord(wordEng, wordVie);
             }
-
-            // Close file (automated???)
         } catch (IOException e) {
             System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
             // e.printStackTrace();  for debugging
@@ -105,8 +69,6 @@ public class DictionaryManagement {
      * - 'd' : Delete a word.
      * - 'm' : Modify meaning of a word.
      * - 'w' : Modify a word with given meaning.
-     *
-     * Trying to make this repeatable but not working. Try to fix it N, OK_^_
      */
     void optionFromCommandLine() {
         Scanner sc = new Scanner(System.in);
@@ -115,16 +77,17 @@ public class DictionaryManagement {
         while (next) {
             System.out.println("Option to do:");
             System.out.println("  - 'sw': Search for a word.");
-            System.out.println("  - 'sp': Search words have beginning part.");
+            System.out.println("  - 'sp': Search words from their beginning part.");
             System.out.println("  - 'd' : Delete a word.");
-            System.out.println("  - 'm' : Modify meaning of a word.");
+            System.out.println("  - 'm' : Modify the meaning of a word.");
             System.out.println("  - 'w' : Modify a word with given meaning.");
+            System.out.println("  - 'list' : List all the words in the dictionary.");
             System.out.println("What do you want to do: ");
 
             switch (sc.nextLine()) {
                 case "sw" -> {
                     System.out.println("Please write the word you want to search: ");
-                    dictionaryLookedUp(sc.nextLine());
+                    dictionaryLookup(sc.nextLine());
                 }
                 case "sp" -> {
                     System.out.println("Please write the part you want to search: ");
@@ -142,14 +105,25 @@ public class DictionaryManagement {
                     System.out.println("Please write the word and new word you want to modify: ");
                     dictionaryModWord(sc.nextLine(), sc.nextLine());
                 }
+                case "list" -> {
+                    showAllWords();
+                }
+                default -> {
+                    System.out.println("Wrong input. Press any key to continue or 'x' to end this session. ");
+                    if (!sc.nextLine().equals("x")) {
+                        continue;
+                    }
+                    next = false;
+                }
             }
 
-            System.out.println("Do you want to quit or do other option?");
-            System.out.println("any key to quit or 'y' to continue:");
-            if (sc.nextLine().equals("y")) {
-                continue;
+            if (next) {
+                System.out.println("Press any key to quit or 'y' to continue using this Fully Automated Luxury Dictionary:");
+                if (sc.nextLine().equals("y")) {
+                    continue;
+                }
+                next = false;
             }
-            next = false;
         }
     }
 
@@ -186,7 +160,7 @@ public class DictionaryManagement {
     /**
      * Print the word user want and meaning.
      */
-    void dictionaryLookedUp(String word) {
+    void dictionaryLookup(String word) {
         String pWord = dictionary.searchWord(word);
         if (pWord.equals("We can't find it!")) {
             System.out.println(pWord);
@@ -208,12 +182,12 @@ public class DictionaryManagement {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Replace meaning of the given word.
+     * Replace the meaning of the given word.
      */
     void dictionaryModMean(String word, String newMean) {
         String modifiedMeaning = dictionary.changeMean(word, newMean);
         if (!modifiedMeaning.equals("We can't find it!")) {
-            System.out.println(word + " has new meaning: " + modifiedMeaning);
+            System.out.println(word + " has a new meaning: " + modifiedMeaning);
         } else {
             System.out.println(modifiedMeaning);
         }
@@ -231,7 +205,50 @@ public class DictionaryManagement {
         } else {
             dictionary.deleteWord(word);
             dictionary.addWord(newWord, modifiedWord);
-            System.out.println(word + " has bean change to " + newWord);
+            System.out.println(word + " has changed to " + newWord);
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Insert from Command Line.
+     */
+    void insertFromCommandline() {
+        /* Variables */
+        Scanner sc = new Scanner(System.in);    // Using scanner to receive user inputs.
+        int numberOfWords = -1;
+        String wordEng;
+        String wordVie;
+
+        /* Input */
+        while (numberOfWords < 0) {
+            System.out.println("How many words are there?");
+            System.out.print("(Input a non-negative number): ");
+            numberOfWords = sc.nextInt();    // After using sc.nextInt(), we have to flush (?) the input stream
+        }
+        // Flushed!
+        String autoFlush = sc.nextLine();   // Important variable meow~~
+
+        while (numberOfWords > 0) {
+            System.out.println("Input the English word and its Vietnamese translation: ");
+            wordEng = sc.nextLine();
+            wordVie = sc.nextLine();
+
+            /* Non-empty check */
+            while (wordEng.equals("")) {
+                System.out.println("<!> Re-input the English word <!>");
+                wordEng = sc.nextLine();
+            }
+            while (wordVie.equals("")) {
+                System.out.println("<!> Re-input the Vietnamese translation <!>");
+                wordVie = sc.nextLine();
+            }
+
+            /* Added to the dictionary */
+            dictionary.addWord(wordEng, wordVie);
+
+            --numberOfWords; // Reduce the number of Word in the queue by 1
         }
     }
 
