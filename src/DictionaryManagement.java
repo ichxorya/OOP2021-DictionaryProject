@@ -1,4 +1,7 @@
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -23,43 +26,6 @@ public class DictionaryManagement {
 
     DictChar dictionary = new DictChar(' ', "");      // init the dictionary.
 
-    //-----------------------------------------------------------------------------------------------------------------------------//
-
-    /**
-     * Insert from File.
-     */
-    void insertFromFile() {
-        Scanner sc;    // Using scanner to receive data from external file.
-        Scanner parser;    // Using scanner to parse strings from external file.
-        String wordEng;
-        String wordVie;
-        String readLine;
-
-        try {
-            // Open file
-            File dictionaryFile = new File("src/dictionaries.txt");
-
-            // Read file
-            sc = new Scanner(dictionaryFile);
-
-            // Imply that the input file is P E R F E C T
-            while (sc.hasNextLine()) {
-                readLine = sc.nextLine();
-                parser = new Scanner(readLine);
-                parser.useDelimiter("\t");
-
-                wordEng = parser.next();
-                wordVie = parser.next();
-
-                //Input
-                dictionary.addWord(wordEng, wordVie);
-            }
-        } catch (IOException e) {
-            System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
-            // e.printStackTrace();  for debugging
-        }
-    }
-
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
@@ -69,6 +35,8 @@ public class DictionaryManagement {
      * - 'd' : Delete a word.
      * - 'm' : Modify meaning of a word.
      * - 'w' : Modify a word with given meaning.
+     * - 'list' : List all the words in the dictionary.
+     * - 'export' : Export the dictionary to a text file.
      */
     void optionFromCommandLine() {
         Scanner sc = new Scanner(System.in);
@@ -82,6 +50,7 @@ public class DictionaryManagement {
             System.out.println("  - 'm' : Modify the meaning of a word.");
             System.out.println("  - 'w' : Modify a word with given meaning.");
             System.out.println("  - 'list' : List all the words in the dictionary.");
+            System.out.println("  - 'export' : Export the dictionary to a text file.");
             System.out.println("What do you want to do: ");
 
             switch (sc.nextLine()) {
@@ -99,7 +68,7 @@ public class DictionaryManagement {
                 }
                 case "m" -> {
                     System.out.println("Please write the word and new meaning you want to modify meaning: ");
-                    dictionaryModMean(sc.nextLine(), sc.nextLine());
+                    dictionaryModMeaning(sc.nextLine(), sc.nextLine());
                 }
                 case "w" -> {
                     System.out.println("Please write the word and new word you want to modify: ");
@@ -107,6 +76,14 @@ public class DictionaryManagement {
                 }
                 case "list" -> {
                     showAllWords();
+                }
+                case "export" -> {
+                    try {
+                        dictionaryExportToFile();
+                    } catch (IOException e) {
+                        System.out.println("<!> Can't export to file for some reasons <!>");
+//                        e.printStackTrace(); debug
+                    }
                 }
                 default -> {
                     System.out.println("Wrong input. Press any key to continue or 'x' to end this session. ");
@@ -137,6 +114,8 @@ public class DictionaryManagement {
         System.out.println("NO   | English    | Vietnamese");
         /* Print out the English word and its Vietnamese translation */
         int a = dictionary.printAll("", 0, 0);
+
+        System.out.println("All available words have been displayed!");
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
@@ -184,8 +163,8 @@ public class DictionaryManagement {
     /**
      * Replace the meaning of the given word.
      */
-    void dictionaryModMean(String word, String newMean) {
-        String modifiedMeaning = dictionary.changeMean(word, newMean);
+    void dictionaryModMeaning(String word, String newMean) {
+        String modifiedMeaning = dictionary.changeMeaning(word, newMean);
         if (!modifiedMeaning.equals("We can't find it!")) {
             System.out.println(word + " has a new meaning: " + modifiedMeaning);
         } else {
@@ -253,5 +232,74 @@ public class DictionaryManagement {
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Insert from file.
+     */
+    void insertFromFile() {
+        Scanner sc;    // Using scanner to receive data from external file.
+        Scanner parser;    // Using scanner to parse strings from external file.
+        String wordEng;
+        String wordVie;
+        String readLine;
+
+        try {
+            // Open file
+            File dictionaryFile = new File("src/dictionaries.txt");
+
+            // Read file
+            sc = new Scanner(dictionaryFile);
+
+            // Imply that the input file is P E R F E C T
+            while (sc.hasNextLine()) {
+                readLine = sc.nextLine();
+                parser = new Scanner(readLine);
+                parser.useDelimiter("\t");
+
+                wordEng = parser.next();
+                wordVie = parser.next();
+
+                //Input
+                dictionary.addWord(wordEng, wordVie);
+            }
+        } catch (IOException e) {
+            System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
+            // e.printStackTrace();  for debugging
+        }
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Export to file (output<outputDate>).
+     * Thanks to: https://stackoverflow.com/a/6745127
+     */
+    void dictionaryExportToFile() throws IOException {
+        // Output date
+        Date today = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+        String strDate= dateFormatter.format(today);
+        String dictFileName = String.format("output%s.txt", strDate);
+
+        BufferedWriter out = new BufferedWriter(new FileWriter(dictFileName));
+        try {
+            ArrayList<String> dictToFile = new ArrayList<>();
+            int fillDict = dictionary.dictToFileFiller(dictToFile, "", 0);
+            String inputLine = null;
+            int index = 0;
+            do {
+                inputLine = dictToFile.get(index);
+                out.write(inputLine);
+                out.newLine();
+                ++index;
+            } while (index < dictToFile.size());
+        } catch(IOException e) {
+            System.out.println("<!> Error during reading/writing <!>");
+        } finally {
+            out.close();
+        }
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------//
 
 }

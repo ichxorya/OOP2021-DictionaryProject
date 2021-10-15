@@ -34,6 +34,20 @@ public class DictionaryUtilities {
         System.out.println(indexStr + firstWord + secondWord);
     }
 
+    /**
+     * Reformat the output strings then return them as a new string.
+     */
+    static String formatStringAndReturn(int index, String firstWord, String secondWord) {
+        /* Space-padding */
+        String indexStr = index + "";
+        firstWord = "|" + firstWord;
+        secondWord = "| " + secondWord;
+
+        indexStr = String.format("%" + 5 + "s", indexStr);
+        firstWord = String.format("%" + (-13) + "s", firstWord);
+        return (indexStr + firstWord + secondWord);
+    }
+
     @Deprecated
     /* Replaced with more efficient method. */
     static void formatStringAndPrint_Old(int index, String firstWord, String secondWord) {

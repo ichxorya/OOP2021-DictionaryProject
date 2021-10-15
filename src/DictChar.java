@@ -128,17 +128,17 @@ public class DictChar {
      * Recursive method to change meaning of a word in the tree.
      * return "we can't find it" if there's no word.
      */
-    String changeMean(String inputWord, String newMean) {
+    String changeMeaning(String inputWord, String newMeaning) {
         String noFound = "We can't find it!";
         char ch = inputWord.charAt(0);
 
         for (int i = 0; i < afterChar.size(); i++) {
             if (afterChar.get(i).getCharacter() == ch) {
                 if (inputWord.length() == 1) {
-                    afterChar.get(i).setMeaning(newMean);
+                    afterChar.get(i).setMeaning(newMeaning);
                     return afterChar.get(i).getMeaning();
                 } else {
-                    return afterChar.get(i).changeMean(inputWord.substring(1, inputWord.length()), newMean);
+                    return afterChar.get(i).changeMeaning(inputWord.substring(1, inputWord.length()), newMeaning);
                 }
             }
         }
@@ -198,7 +198,7 @@ public class DictChar {
     int printAll(String wordForm, int index, int flag) {
         wordForm += getCharacter();
 
-        if (getMeaning() != "") {
+        if (!getMeaning().equals("")) {
             if (flag == 0) {
                 index += 1;
                 DictionaryUtilities.formatStringAndPrint(index, wordForm, getMeaning());
@@ -212,6 +212,26 @@ public class DictChar {
         }
         return index;
     }
+
+    /**
+     *  Modified printAll() to match the dict-to-file method.
+     *  Goddamn I'm stoopid af, this is unoptimized but it works lol!
+     */
+    int dictToFileFiller(ArrayList<String> dictToFile, String wordForm, int index) {
+            wordForm += getCharacter();
+
+            if (!getMeaning().equals("")) {
+                index += 1;
+                dictToFile.add(DictionaryUtilities.formatStringAndReturn(index, wordForm, getMeaning()));
+            }
+
+            if (afterChar.size() != 0) {
+                for (int i = 0; i < afterChar.size(); i++) {
+                    index = afterChar.get(i).dictToFileFiller(dictToFile, wordForm, index);
+                }
+            }
+            return index;
+        }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
