@@ -37,6 +37,7 @@ public class DictionaryManagement {
      * - 'w' : Modify a word with given meaning.
      * - 'list' : List all the words in the dictionary.
      * - 'export' : Export the dictionary to a text file.
+     * - 'new' : Add new words from command line.
      */
     void optionFromCommandLine() {
         Scanner sc = new Scanner(System.in);
@@ -51,6 +52,7 @@ public class DictionaryManagement {
             System.out.println("  - 'w' : Modify a word with given meaning.");
             System.out.println("  - 'list' : List all the words in the dictionary.");
             System.out.println("  - 'export' : Export the dictionary to a text file.");
+            System.out.println("  - 'new' : Add new words from command line.");
             System.out.println("What do you want to do: ");
 
             switch (sc.nextLine()) {
@@ -84,6 +86,9 @@ public class DictionaryManagement {
                         System.out.println("<!> Can't export to file for some reasons <!>");
 //                        e.printStackTrace(); debug
                     }
+                }
+                case "new" -> {
+                    insertFromCommandline();
                 }
                 default -> {
                     System.out.println("Wrong input. Press any key to continue or 'x' to end this session. ");
