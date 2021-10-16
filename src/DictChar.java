@@ -74,23 +74,23 @@ public class DictChar {
     /**
      * Recursive method to put a word and its meaning into the tree.
      */
-    void addWord(String engWord, String vieWord) {
-        char ch = engWord.charAt(0);
+    void addWord(String word, String meaning) {
+        char ch = word.charAt(0);
 
         int loc = findChar(ch);
 
         if (loc == -1) {
-            if (engWord.length() == 1) {
-                this.afterChar.add(new DictChar(ch, vieWord));
+            if (word.length() == 1) {
+                this.afterChar.add(new DictChar(ch, meaning));
             } else {
                 this.afterChar.add(new DictChar(ch, ""));
-                this.afterChar.get(this.afterChar.size() - 1).addWord(engWord.substring(1, engWord.length()), vieWord);
+                this.afterChar.get(this.afterChar.size() - 1).addWord(word.substring(1, word.length()), meaning);
             }
         } else {
-            if (engWord.length() == 1) {
-                this.afterChar.get(loc).setMeaning(vieWord);
+            if (word.length() == 1) {
+                this.afterChar.get(loc).setMeaning(meaning);
             } else {
-                this.afterChar.get(loc).addWord(engWord.substring(1, engWord.length()), vieWord);
+                this.afterChar.get(loc).addWord(word.substring(1, word.length()), meaning);
             }
         }
         DictionaryUtilities.ArrSort(this);

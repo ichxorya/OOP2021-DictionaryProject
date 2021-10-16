@@ -24,7 +24,8 @@ public class DictionaryManagement {
 
     //-----------------------------------------------------------------------------------------------------------------------------//
 
-    DictChar dictionary = new DictChar(' ', "");      // init the dictionary.
+    DictChar dictionaryEng = new DictChar(' ', "");      // init the Eng -> Vie dictionary.
+    DictChar dictionaryVie = new DictChar(' ', "");      // init the Vie -> Eng dictionary.
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
@@ -45,36 +46,61 @@ public class DictionaryManagement {
         boolean next = true;
         while (next) {
             System.out.println("Option to do:");
-            System.out.println("  - 'sw': Search for a word.");
-            System.out.println("  - 'sp': Search words from their beginning part.");
-            System.out.println("  - 'd' : Delete a word.");
-            System.out.println("  - 'm' : Modify the meaning of a word.");
-            System.out.println("  - 'w' : Modify a word with given meaning.");
+            System.out.println("  - 'swe': Search for an English word.");
+            System.out.println("  - 'swv': Search for a Vietnamese word.");
+            System.out.println("  - 'spe': Search English words from their beginning part.");
+            System.out.println("  - 'spv': Search Vietnamese words from their beginning part.");
+            System.out.println("  - 'de' : Delete an English word.");
+            System.out.println("  - 'dv' : Delete an Vietnamese word.");
+            System.out.println("  - 'me' : Modify the meaning of an English word.");
+            System.out.println("  - 'mv' : Modify the meaning of a Vietnamese word.");
+            System.out.println("  - 'we' : Modify an English word with given meaning.");
+            System.out.println("  - 'wv' : Modify a Vietnamese word with given meaning.");
             System.out.println("  - 'list' : List all the words in the dictionary.");
             System.out.println("  - 'export' : Export the dictionary to a text file.");
             System.out.println("  - 'new' : Add new words from command line.");
             System.out.println("What do you want to do: ");
 
             switch (sc.nextLine()) {
-                case "sw" -> {
+                case "swe" -> {
                     System.out.println("Please write the word you want to search: ");
-                    dictionaryLookup(sc.nextLine());
+                    dictionaryLookup(sc.nextLine(), dictionaryEng);
                 }
-                case "sp" -> {
+                case "swv" -> {
+                    System.out.println("Please write the word you want to search: ");
+                    dictionaryLookup(sc.nextLine(), dictionaryVie);
+                }
+                case "spe" -> {
                     System.out.println("Please write the part you want to search: ");
-                    dictionarySearcher(sc.nextLine());
+                    dictionarySearcher(sc.nextLine(), dictionaryEng);
                 }
-                case "d" -> {
+                case "spv" -> {
+                    System.out.println("Please write the part you want to search: ");
+                    dictionarySearcher(sc.nextLine(), dictionaryVie);
+                }
+                case "de" -> {
                     System.out.println("Please write the word you want to delete: ");
-                    dictionaryDelete(sc.nextLine());
+                    dictionaryDelete(sc.nextLine(), dictionaryEng);
                 }
-                case "m" -> {
+                case "dv" -> {
+                    System.out.println("Please write the word you want to delete: ");
+                    dictionaryDelete(sc.nextLine(), dictionaryVie);
+                }
+                case "me" -> {
                     System.out.println("Please write the word and new meaning you want to modify meaning: ");
-                    dictionaryModMeaning(sc.nextLine(), sc.nextLine());
+                    dictionaryModMeaning(sc.nextLine(), sc.nextLine(), dictionaryEng);
                 }
-                case "w" -> {
+                case "mv" -> {
+                    System.out.println("Please write the word and new meaning you want to modify meaning: ");
+                    dictionaryModMeaning(sc.nextLine(), sc.nextLine(), dictionaryVie);
+                }
+                case "we" -> {
                     System.out.println("Please write the word and new word you want to modify: ");
-                    dictionaryModWord(sc.nextLine(), sc.nextLine());
+                    dictionaryModWord(sc.nextLine(), sc.nextLine(), dictionaryEng);
+                }
+                case "wv" -> {
+                    System.out.println("Please write the word and new word you want to modify: ");
+                    dictionaryModWord(sc.nextLine(), sc.nextLine(), dictionaryVie);
                 }
                 case "list" -> {
                     showAllWords();
@@ -118,7 +144,7 @@ public class DictionaryManagement {
         /* Message's length:012345678901234567890123456789*/
         System.out.println("NO   | English    | Vietnamese");
         /* Print out the English word and its Vietnamese translation */
-        int a = dictionary.printAll("", 0, 0);
+        int a = dictionaryEng.printAll("", 0, 0);
 
         System.out.println("All available words have been displayed!");
     }
@@ -128,13 +154,17 @@ public class DictionaryManagement {
     /**
      * Print all the word with the beginning is part and meaning.
      */
-    void dictionarySearcher(String part) {
+    void dictionarySearcher(String part, DictChar dictionary) {
         DictChar fWord = dictionary.searchPart(part);
         if (fWord.getCharacter() == dictionary.getCharacter()) {
             System.out.println("No word found!");
         } else {
             System.out.println("Word have the same past you are searching for");
-            System.out.println("NO   | English    | Vietnamese");
+            if (dictionary == dictionaryEng) {
+                System.out.println("NO   | English    | Vietnamese");
+            } else {
+                System.out.println("NO   | Vietnamese    | English");
+            }
             fWord.printAll(part.substring(0,part.length() - 1), 0, 0);
         }
     }
@@ -144,7 +174,7 @@ public class DictionaryManagement {
     /**
      * Print the word user want and meaning.
      */
-    void dictionaryLookup(String word) {
+    void dictionaryLookup(String word, DictChar dictionary) {
         String pWord = dictionary.searchWord(word);
         if (pWord.equals("We can't find it!")) {
             System.out.println(pWord);
@@ -159,8 +189,38 @@ public class DictionaryManagement {
     /**
      * Delete the given word.
      */
-    void dictionaryDelete(String word) {
-        System.out.println(dictionary.deleteWord(word));
+    void dictionaryDelete(String word, DictChar dictionary) {
+        String mean = dictionary.searchWord(word);
+        if (mean.equals("We can't find it!")) {
+            System.out.println("This word does not exist!");
+        } else {
+            if (dictionary == dictionaryEng) {
+                dictionaryEng.deleteWord(word);
+                dictionaryVie.deleteWord(mean);
+            } else {
+                dictionaryEng.deleteWord(mean);
+                dictionaryVie.deleteWord(word);
+            }
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Replace the old word pair by new word pair.
+     */
+    void dictionaryReplace(String wordEng, String wordVie) {
+        String engMean = wordEng;
+        String vieMean = wordVie;
+        if (wordEng.equals("")) {
+            engMean = dictionaryVie.searchWord(wordVie);
+        } else if (wordVie.equals("")) {
+            vieMean = dictionaryEng.searchWord(wordVie);
+        }
+        dictionaryEng.deleteWord(engMean);
+        dictionaryVie.deleteWord(vieMean);
+        dictionaryEng.addWord(engMean, vieMean);
+        dictionaryVie.addWord(vieMean, engMean);
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
@@ -168,12 +228,16 @@ public class DictionaryManagement {
     /**
      * Replace the meaning of the given word.
      */
-    void dictionaryModMeaning(String word, String newMean) {
-        String modifiedMeaning = dictionary.changeMeaning(word, newMean);
-        if (!modifiedMeaning.equals("We can't find it!")) {
-            System.out.println(word + " has a new meaning: " + modifiedMeaning);
+    void dictionaryModMeaning(String word, String newMean, DictChar dictionary) {
+        String oldMean = dictionary.searchWord(word);
+        if (oldMean.equals("We can't find it!")) {
+            System.out.println(oldMean);
         } else {
-            System.out.println(modifiedMeaning);
+            if (dictionary == dictionaryEng) {
+                dictionaryReplace(word, newMean);
+            } else {
+                dictionaryReplace(newMean, word);
+            }
         }
     }
 
@@ -182,14 +246,16 @@ public class DictionaryManagement {
     /**
      * Replace the word but keep its meaning.
      */
-    void dictionaryModWord(String word, String newWord) {
-        String modifiedWord = dictionary.searchWord(word);
-        if (modifiedWord.equals("No word found!")) {
-            System.out.println(modifiedWord);
+    void dictionaryModWord(String word, String newWord, DictChar dictionary) {
+        String mean = dictionary.searchWord(word);
+        if (mean.equals("We can't find it!")) {
+            System.out.println(mean);
         } else {
-            dictionary.deleteWord(word);
-            dictionary.addWord(newWord, modifiedWord);
-            System.out.println(word + " has changed to " + newWord);
+            if (dictionary == dictionaryEng) {
+                dictionaryReplace(newWord, mean);
+            } else {
+                dictionaryReplace(mean, newWord);
+            }
         }
     }
 
@@ -230,7 +296,8 @@ public class DictionaryManagement {
             }
 
             /* Added to the dictionary */
-            dictionary.addWord(wordEng, wordVie);
+            dictionaryEng.addWord(wordEng, wordVie);
+            dictionaryVie.addWord(wordVie, wordEng);
 
             --numberOfWords; // Reduce the number of Word in the queue by 1
         }
@@ -265,7 +332,8 @@ public class DictionaryManagement {
                 wordVie = parser.next();
 
                 //Input
-                dictionary.addWord(wordEng, wordVie);
+                dictionaryEng.addWord(wordEng, wordVie);
+                dictionaryVie.addWord(wordVie, wordEng);
             }
         } catch (IOException e) {
             System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
@@ -289,7 +357,7 @@ public class DictionaryManagement {
         BufferedWriter out = new BufferedWriter(new FileWriter(dictFileName));
         try {
             ArrayList<String> dictToFile = new ArrayList<>();
-            int fillDict = dictionary.dictToFileFiller(dictToFile, "", 0);
+            int fillDict = dictionaryEng.dictToFileFiller(dictToFile, "", 0);
             String inputLine = null;
             int index = 0;
             do {
