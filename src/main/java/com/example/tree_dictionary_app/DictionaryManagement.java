@@ -323,7 +323,7 @@ public class DictionaryManagement {
 
         try {
             // Open file
-            File dictionaryFile = new File("dict/dictionaries.txt");
+            FileReader dictionaryFile = new FileReader("dictionaries.txt");
 
             // Read file
             sc = new Scanner(dictionaryFile);
