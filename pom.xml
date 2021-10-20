@@ -119,7 +119,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.tree_dictionary_app/com.example.tree_dictionary_app.HelloApplication
+                                com.example.tree_dictionary_app/com.example.tree_dictionary_app.Application
                             </mainClass>
                         </configuration>
                     </execution>
