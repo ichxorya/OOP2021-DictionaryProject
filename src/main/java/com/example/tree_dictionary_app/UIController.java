@@ -17,20 +17,35 @@ public class UIController {
     private TextField out = new TextField();
 
     @FXML
+    private TextField in2 = new TextField();
+
+    @FXML
+    private TextField out2 = new TextField();
+
+    @FXML
     private TextArea inArea = new TextArea();
 
     @FXML
     private TextArea outArea = new TextArea();
 
     @FXML
+    protected void clear() {
+        out.setText("");
+    }
+
+    @FXML
     protected void searchWord() {
         String word = in.getText();
-        out.setText(dictionary.dictionaryLookup(word, dictionary.dictionaryEng));
+        if (word.equals("")) {
+            out.setText("");
+        } else {
+            out.setText(dictionary.dictionaryLookup(word, dictionary.dictionaryEng));
+        }
     }
 
     @FXML
     protected void searchPartEng() {
-        String word = in.getText();
+        String word = in2.getText();
         if (word.equals("")) {
             inArea.setText("");
             outArea.setText("");
