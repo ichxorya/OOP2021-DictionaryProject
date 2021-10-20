@@ -12,7 +12,7 @@ public class DictionaryCommandline {
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
-    DictionaryManagement cliDictionary = new DictionaryManagement();   // init a dictionary management to use.
+    DictionaryManagementCmd cliDictionary = new DictionaryManagementCmd();   // init a dictionary management to use.
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 

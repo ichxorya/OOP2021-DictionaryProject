@@ -25,7 +25,7 @@ public class DictionaryUtilities {
      * 2    | Uncle      | Chú
      * 3    | Zoo        | Vườn thú
      */
-    static void formatStringAndPrint(int index, String firstWord, String secondWord) {
+    static String formatStringAndPrint(int index, String firstWord, String secondWord) {
         /* Space-padding */
         String indexStr = index + "";
         firstWord = "|" + firstWord;
@@ -33,7 +33,7 @@ public class DictionaryUtilities {
 
         indexStr = String.format("%" + 5 + "s", indexStr);
         firstWord = String.format("%" + (-13) + "s", firstWord);
-        System.out.println(indexStr + firstWord + secondWord);
+        return indexStr + firstWord + secondWord;
     }
 
     /**

@@ -22,7 +22,7 @@ import java.util.Scanner;
  * !!!!!!!!
  */
 
-public class DictionaryManagement {
+public class DictionaryManagementCmd {
 
     //-----------------------------------------------------------------------------------------------------------------------------//
 
@@ -146,8 +146,7 @@ public class DictionaryManagement {
         /* Message's length:012345678901234567890123456789*/
         System.out.println("NO   | English    | Vietnamese");
         /* Print out the English word and its Vietnamese translation */
-        int a = dictionaryEng.printAll("", 0, 0);
-
+        int a = dictionaryEng.printAll("", 0);
         System.out.println("All available words have been displayed!");
     }
 
@@ -167,15 +166,11 @@ public class DictionaryManagement {
             } else {
                 System.out.println("NO   | Vietnamese    | English");
             }
-            fWord.printAll(part.substring(0,part.length() - 1), 0, 0);
+            fWord.printAll(part.substring(0,part.length() - 1), 0);
         }
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
-
-    public String dictionaryLookupMean(String word) {
-        return dictionaryEng.searchWord(word);
-    }
 
     /**
      * Print the word user want and meaning.
@@ -323,7 +318,7 @@ public class DictionaryManagement {
 
         try {
             // Open file
-            FileReader dictionaryFile = new FileReader("dictionaries.txt");
+            FileReader dictionaryFile = new FileReader("src\\dictionaries.txt");
 
             // Read file
             sc = new Scanner(dictionaryFile);

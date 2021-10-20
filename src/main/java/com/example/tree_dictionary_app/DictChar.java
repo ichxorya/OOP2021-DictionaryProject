@@ -197,23 +197,49 @@ public class DictChar {
      * flag 1 to print to visual app. (not yet)
      * return number of word in that branch.
      */
-    int printAll(String wordForm, int index, int flag) {
+    int printAll(String wordForm, int index) {
         wordForm += getCharacter();
-
         if (!getMeaning().equals("")) {
-            if (flag == 0) {
-                index += 1;
-                DictionaryUtilities.formatStringAndPrint(index, wordForm, getMeaning());
-            } else {
-            }
+            index += 1;
+            DictionaryUtilities.formatStringAndPrint(index, wordForm, getMeaning());
         }
         if (afterChar.size() != 0) {
             for (int i = 0; i < afterChar.size(); i++) {
-                index = afterChar.get(i).printAll(wordForm, index, flag);
+                index = afterChar.get(i).printAll(wordForm, index);
             }
         }
         return index;
     }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
+    String printAllWord(String wordForm, String listWord) {
+        wordForm += getCharacter();
+        if (!getMeaning().equals("")) {
+            listWord += wordForm + "\n";
+        }
+        if (afterChar.size() != 0) {
+            for (int i = 0; i < afterChar.size(); i++) {
+                listWord = afterChar.get(i).printAllWord(wordForm, listWord);
+            }
+        }
+        return listWord;
+    }
+
+    String printAllMean(String wordForm, String listWord) {
+        wordForm += getCharacter();
+        if (!getMeaning().equals("")) {
+            listWord += getMeaning() + "\n";
+        }
+        if (afterChar.size() != 0) {
+            for (int i = 0; i < afterChar.size(); i++) {
+                listWord = afterChar.get(i).printAllMean(wordForm, listWord);
+            }
+        }
+        return listWord;
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
      *  Modified printAll() to match the dict-to-file method.

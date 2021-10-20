@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 
 public class HelloController {
 
-    DictionaryManagement dictionary = new DictionaryManagement();
+    DictionaryManagementUI dictionary = new DictionaryManagementUI();
 
     @FXML
     private TextField in = new TextField();
@@ -17,21 +17,27 @@ public class HelloController {
     private TextField out = new TextField();
 
     @FXML
-    private Label welcomeText;
+    private TextArea inArea = new TextArea();
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
+    private TextArea outArea = new TextArea();
+
     @FXML
-    protected void Testbutton() {
-        welcomeText.setText("Welcome to Application!");
+    protected void searchWord() {
+        String word = in.getText();
+        out.setText(dictionary.dictionaryLookup(word, dictionary.dictionaryEng));
     }
 
     @FXML
-    protected void printText() {
-        String a = in.getText();
-        out.setText(dictionary.dictionaryLookupMean(a));
+    protected void searchPartEng() {
+        String word = in.getText();
+        if (word.equals("")) {
+            inArea.setText("");
+            outArea.setText("");
+        } else {
+            inArea.setText(dictionary.dictionarySearcherIn(word, dictionary.dictionaryEng));
+            outArea.setText(dictionary.dictionarySearcherOut(word, dictionary.dictionaryEng));
+        }
     }
 
 }
