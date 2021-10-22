@@ -131,7 +131,7 @@ public class UIController {
             dictionary.addWord(wordEng, wordVie);
             isAddDone.setText("Done");
         }
-
+        
 
     }
 
