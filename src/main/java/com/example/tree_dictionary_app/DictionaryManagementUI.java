@@ -1,7 +1,12 @@
 package com.example.tree_dictionary_app;
 
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class DictionaryManagementUI {
@@ -38,12 +43,96 @@ public class DictionaryManagementUI {
         }
     }
 
+    /**
+     * Print all meaning of words with the beginning is part.
+     */
     String dictionarySearcherOut(String part, DictChar dictionary) {
         DictChar fWord = dictionary.searchPart(part);
         if (fWord.getCharacter() == dictionary.getCharacter()) {
             return "No word found!";
         } else {
             return fWord.printAllMean(part.substring(0,part.length() - 1), "");
+        }
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Add a word and its meaning to dictionary.
+     */
+    void addWord(String wordEng, String wordVie) {
+        dictionaryEng.addWord(wordEng, wordVie);
+        dictionaryVie.addWord(wordVie, wordEng);
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Delete a word and its meaning from dictionary.
+     */
+    String deleteWord(String word, DictChar dictionary) {
+        String mean = dictionary.searchWord(word);
+        if (mean.equals("We can't find it!")) {
+            return mean;
+        } else {
+            if (dictionary.equals(dictionaryEng)) {
+                dictionaryEng.deleteWord(word);
+                dictionaryVie.deleteWord(mean);
+            } else {
+                dictionaryEng.deleteWord(mean);
+                dictionaryVie.deleteWord(word);
+            }
+            return "Done";
+        }
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Replace the word but keep its meaning.
+     */
+    String dictionaryModWord(String word, String newWord, DictChar dictionary) {
+        String mean = dictionary.searchWord(word);
+        if (mean.equals("We can't find it!")) {
+            return mean;
+        } else {
+            if (dictionary.equals(dictionaryEng)) {
+                dictionaryEng.deleteWord(word);
+                dictionaryVie.deleteWord(mean);
+                dictionaryEng.addWord(newWord, mean);
+                dictionaryVie.addWord(mean, newWord);
+            } else {
+                dictionaryVie.deleteWord(word);
+                dictionaryEng.deleteWord(mean);
+                dictionaryVie.addWord(newWord, mean);
+                dictionaryEng.addWord(mean, newWord);
+            }
+            return "Done";
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Replace the meaning of the given word.
+     */
+    String dictionaryModMeaning(String word, String newMean, DictChar dictionary) {
+        String oldMean = dictionary.searchWord(word);
+        if (oldMean.equals("We can't find it!")) {
+            return oldMean;
+        } else {
+            if (dictionary.equals(dictionaryEng)) {
+                dictionaryEng.deleteWord(word);
+                dictionaryVie.deleteWord(oldMean);
+                dictionaryEng.addWord(word, newMean);
+                dictionaryVie.addWord(newMean, word);
+            } else {
+                dictionaryVie.deleteWord(word);
+                dictionaryEng.deleteWord(oldMean);
+                dictionaryVie.addWord(word, newMean);
+                dictionaryEng.addWord(newMean, word);
+            }
+            return "Done";
         }
     }
 
@@ -82,6 +171,35 @@ public class DictionaryManagementUI {
         } catch (IOException e) {
             System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
             // e.printStackTrace();  for debugging
+        }
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Export to file (output<outputDate>).
+     * Thanks to: https://stackoverflow.com/a/6745127
+     */
+    void dictionaryExportToFile() {
+        // Output date
+        Date today = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+        String strDate= dateFormatter.format(today);
+        String dictFileName = String.format("output%s.txt", strDate);
+
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(dictFileName))) {
+            ArrayList<String> dictToFile = new ArrayList<>();
+            dictionaryEng.dictToFileFiller(dictToFile, "", 0);
+            String inputLine;
+            int index = 0;
+            do {
+                inputLine = dictToFile.get(index);
+                out.write(inputLine);
+                out.newLine();
+                ++index;
+            } while (index < dictToFile.size());
+        } catch (IOException e) {
+            System.out.println("<!> Error during reading/writing <!>");
         }
     }
 

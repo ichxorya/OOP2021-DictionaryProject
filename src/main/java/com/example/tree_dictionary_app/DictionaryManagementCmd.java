@@ -104,9 +104,7 @@ public class DictionaryManagementCmd {
                     System.out.println("Please write the word and new word you want to modify: ");
                     dictionaryModWord(sc.nextLine(), sc.nextLine(), dictionaryVie);
                 }
-                case "list" -> {
-                    showAllWords();
-                }
+                case "list" -> showAllWords();
                 case "export" -> {
                     try {
                         dictionaryExportToFile();
@@ -115,9 +113,7 @@ public class DictionaryManagementCmd {
 //                        e.printStackTrace(); debug
                     }
                 }
-                case "new" -> {
-                    insertFromCommandline();
-                }
+                case "new" -> insertFromCommandline();
                 default -> {
                     System.out.println("Wrong input. Press any key to continue or 'x' to end this session. ");
                     if (!sc.nextLine().equals("x")) {
@@ -146,7 +142,7 @@ public class DictionaryManagementCmd {
         /* Message's length:012345678901234567890123456789*/
         System.out.println("NO   | English    | Vietnamese");
         /* Print out the English word and its Vietnamese translation */
-        int a = dictionaryEng.printAll("", 0);
+        dictionaryEng.printAll("", 0);
         System.out.println("All available words have been displayed!");
     }
 
@@ -208,25 +204,6 @@ public class DictionaryManagementCmd {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Replace the old word pair by new word pair.
-     */
-    void dictionaryReplace(String wordEng, String wordVie) {
-        String engMean = wordEng;
-        String vieMean = wordVie;
-        if (wordEng.equals("")) {
-            engMean = dictionaryVie.searchWord(wordVie);
-        } else if (wordVie.equals("")) {
-            vieMean = dictionaryEng.searchWord(wordVie);
-        }
-        dictionaryEng.deleteWord(engMean);
-        dictionaryVie.deleteWord(vieMean);
-        dictionaryEng.addWord(engMean, vieMean);
-        dictionaryVie.addWord(vieMean, engMean);
-    }
-
-    //----------------------------------------------------------------------------------------------------------------------------------//
-
-    /**
      * Replace the meaning of the given word.
      */
     void dictionaryModMeaning(String word, String newMean, DictChar dictionary) {
@@ -234,11 +211,18 @@ public class DictionaryManagementCmd {
         if (oldMean.equals("We can't find it!")) {
             System.out.println(oldMean);
         } else {
-            if (dictionary == dictionaryEng) {
-                dictionaryReplace(word, newMean);
+            if (dictionary.equals(dictionaryEng)) {
+                dictionaryEng.deleteWord(word);
+                dictionaryVie.deleteWord(oldMean);
+                dictionaryEng.addWord(word, newMean);
+                dictionaryVie.addWord(newMean, word);
             } else {
-                dictionaryReplace(newMean, word);
+                dictionaryVie.deleteWord(word);
+                dictionaryEng.deleteWord(oldMean);
+                dictionaryVie.addWord(word, newMean);
+                dictionaryEng.addWord(newMean, word);
             }
+
         }
     }
 
@@ -252,10 +236,16 @@ public class DictionaryManagementCmd {
         if (mean.equals("We can't find it!")) {
             System.out.println(mean);
         } else {
-            if (dictionary == dictionaryEng) {
-                dictionaryReplace(newWord, mean);
+            if (dictionary.equals(dictionaryEng)) {
+                dictionaryEng.deleteWord(word);
+                dictionaryVie.deleteWord(mean);
+                dictionaryEng.addWord(newWord, mean);
+                dictionaryVie.addWord(mean, newWord);
             } else {
-                dictionaryReplace(mean, newWord);
+                dictionaryVie.deleteWord(word);
+                dictionaryEng.deleteWord(mean);
+                dictionaryVie.addWord(newWord, mean);
+                dictionaryEng.addWord(mean, newWord);
             }
         }
     }
@@ -279,7 +269,7 @@ public class DictionaryManagementCmd {
             numberOfWords = sc.nextInt();    // After using sc.nextInt(), we have to flush (?) the input stream
         }
         // Flushed!
-        String autoFlush = sc.nextLine();   // Important variable meow~~
+        sc.nextLine();   // Important variable meow~~
 
         while (numberOfWords > 0) {
             System.out.println("Input the English word and its Vietnamese translation: ");
@@ -355,11 +345,10 @@ public class DictionaryManagementCmd {
         String strDate= dateFormatter.format(today);
         String dictFileName = String.format("output%s.txt", strDate);
 
-        BufferedWriter out = new BufferedWriter(new FileWriter(dictFileName));
-        try {
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(dictFileName))) {
             ArrayList<String> dictToFile = new ArrayList<>();
-            int fillDict = dictionaryEng.dictToFileFiller(dictToFile, "", 0);
-            String inputLine = null;
+            dictionaryEng.dictToFileFiller(dictToFile, "", 0);
+            String inputLine;
             int index = 0;
             do {
                 inputLine = dictToFile.get(index);
@@ -367,10 +356,8 @@ public class DictionaryManagementCmd {
                 out.newLine();
                 ++index;
             } while (index < dictToFile.size());
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("<!> Error during reading/writing <!>");
-        } finally {
-            out.close();
         }
     }
 

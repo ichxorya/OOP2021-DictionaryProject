@@ -20,7 +20,7 @@ public class DictChar {
 
     private char character;                                             // The character of the branch
     private String meaning;                                             // The meaning of the word of that branch
-    ArrayList<DictChar> afterChar = new ArrayList<DictChar>();          // An ArrayList of DictChar
+    ArrayList<DictChar> afterChar = new ArrayList<>();          // An ArrayList of DictChar
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
@@ -86,13 +86,13 @@ public class DictChar {
                 this.afterChar.add(new DictChar(ch, meaning));
             } else {
                 this.afterChar.add(new DictChar(ch, ""));
-                this.afterChar.get(this.afterChar.size() - 1).addWord(word.substring(1, word.length()), meaning);
+                this.afterChar.get(this.afterChar.size() - 1).addWord(word.substring(1), meaning);
             }
         } else {
             if (word.length() == 1) {
                 this.afterChar.get(loc).setMeaning(meaning);
             } else {
-                this.afterChar.get(loc).addWord(word.substring(1, word.length()), meaning);
+                this.afterChar.get(loc).addWord(word.substring(1), meaning);
             }
         }
         DictionaryUtilities.ArrSort(this);
@@ -113,7 +113,7 @@ public class DictChar {
                     afterChar.remove(i);
                     return "Found and deleted!";
                 } else {
-                    String res =  afterChar.get(i).deleteWord(inputWord.substring(1, inputWord.length()));
+                    String res =  afterChar.get(i).deleteWord(inputWord.substring(1));
                     if (res.equals("Found and deleted!") && afterChar.get(i).afterChar.size() == 0) {
                         afterChar.remove(i);
                     }
@@ -127,29 +127,6 @@ public class DictChar {
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Recursive method to change meaning of a word in the tree.
-     * return "we can't find it" if there's no word.
-     */
-    String changeMeaning(String inputWord, String newMeaning) {
-        String noFound = "We can't find it!";
-        char ch = inputWord.charAt(0);
-
-        for (int i = 0; i < afterChar.size(); i++) {
-            if (afterChar.get(i).getCharacter() == ch) {
-                if (inputWord.length() == 1) {
-                    afterChar.get(i).setMeaning(newMeaning);
-                    return afterChar.get(i).getMeaning();
-                } else {
-                    return afterChar.get(i).changeMeaning(inputWord.substring(1, inputWord.length()), newMeaning);
-                }
-            }
-        }
-        return noFound;
-    }
-
-    //----------------------------------------------------------------------------------------------------------------------------------//
-
-    /**
      * Recursive method to search a word and return ít meaning.
      * return "we can't find it" if there's no word.
      */
@@ -157,12 +134,12 @@ public class DictChar {
         String noFound = "We can't find it!";
         char ch = inputWord.charAt(0);
 
-        for (int i = 0; i < afterChar.size(); i++) {
-            if (afterChar.get(i).getCharacter() == ch) {
+        for (DictChar dictChar : afterChar) {
+            if (dictChar.getCharacter() == ch) {
                 if (inputWord.length() == 1) {
-                    return afterChar.get(i).getMeaning();
+                    return dictChar.getMeaning();
                 } else {
-                    return afterChar.get(i).searchWord(inputWord.substring(1, inputWord.length()));
+                    return dictChar.searchWord(inputWord.substring(1));
                 }
             }
         }
@@ -177,12 +154,12 @@ public class DictChar {
     DictChar searchPart(String part) {
         char ch = part.charAt(0);
 
-        for (int i = 0; i < afterChar.size(); i++) {
-            if (afterChar.get(i).getCharacter() == ch) {
+        for (DictChar dictChar : afterChar) {
+            if (dictChar.getCharacter() == ch) {
                 if (part.length() == 1) {
-                    return afterChar.get(i);
+                    return dictChar;
                 } else {
-                    return afterChar.get(i).searchPart(part.substring(1, part.length()));
+                    return dictChar.searchPart(part.substring(1));
                 }
             }
         }
@@ -204,8 +181,8 @@ public class DictChar {
             DictionaryUtilities.formatStringAndPrint(index, wordForm, getMeaning());
         }
         if (afterChar.size() != 0) {
-            for (int i = 0; i < afterChar.size(); i++) {
-                index = afterChar.get(i).printAll(wordForm, index);
+            for (DictChar dictChar : afterChar) {
+                index = dictChar.printAll(wordForm, index);
             }
         }
         return index;
@@ -219,8 +196,8 @@ public class DictChar {
             listWord += wordForm + "\n";
         }
         if (afterChar.size() != 0) {
-            for (int i = 0; i < afterChar.size(); i++) {
-                listWord = afterChar.get(i).printAllWord(wordForm, listWord);
+            for (DictChar dictChar : afterChar) {
+                listWord = dictChar.printAllWord(wordForm, listWord);
             }
         }
         return listWord;
@@ -232,8 +209,8 @@ public class DictChar {
             listWord += getMeaning() + "\n";
         }
         if (afterChar.size() != 0) {
-            for (int i = 0; i < afterChar.size(); i++) {
-                listWord = afterChar.get(i).printAllMean(wordForm, listWord);
+            for (DictChar dictChar : afterChar) {
+                listWord = dictChar.printAllMean(wordForm, listWord);
             }
         }
         return listWord;
@@ -254,28 +231,11 @@ public class DictChar {
         }
 
         if (afterChar.size() != 0) {
-            for (int i = 0; i < afterChar.size(); i++) {
-                index = afterChar.get(i).dictToFileFiller(dictToFile, wordForm, index);
+            for (DictChar dictChar : afterChar) {
+                index = dictChar.dictToFileFiller(dictToFile, wordForm, index);
             }
         }
         return index;
-    }
-
-    //----------------------------------------------------------------------------------------------------------------------------------//
-
-    /**
-     * Recursive method to print all branch in a tree-style look.
-     * for test and debug only.
-     */
-    void printChar() {
-        System.out.print(getCharacter() + " ");
-        System.out.print("(");
-        if (afterChar.size() > 0) {
-            for (int i = 0; i < afterChar.size(); i++) {
-                afterChar.get(i).printChar();
-            }
-        }
-        System.out.print(")");
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//
