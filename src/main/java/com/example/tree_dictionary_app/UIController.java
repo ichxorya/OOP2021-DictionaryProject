@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class UIController {
 
@@ -242,7 +244,7 @@ public class UIController {
         }
     }
 
-    //-----------------------------------------------------------------------------------------------------------------------------//
+    //----------------------------------------------------------------------------------------------------------------//
 
     @FXML
     private Label isExported = new Label();                         // Label return system respond action success or not
@@ -265,5 +267,19 @@ public class UIController {
         isExported.setText("Done");
     }
 
-    //-----------------------------------------------------------------------------------------------------------------------------//
+    //----------------------------------------------------------------------------------------------------------------//
+
+    Spelling spelling = new Spelling();
+
+    @FXML
+    protected void PlaySpelling() throws Exception {
+        spelling.spellingWord(engFieldWord.getText());
+
+        Media media = new Media("src\\voice.wav");
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+
+    }
+
+    //----------------------------------------------------------------------------------------------------------------//
 }
