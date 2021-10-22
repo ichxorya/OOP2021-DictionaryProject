@@ -9,11 +9,15 @@ module com.example.tree_dictionary_app {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
-    requires voicerss.tts;
-    requires java.datatransfer;
-    requires java.desktop;
-    requires javafx.media;
 
     opens com.example.tree_dictionary_app to javafx.fxml;
     exports com.example.tree_dictionary_app;
+
+    //needed for HTTP
+    requires unirest.java;
+
+    //needed for JSON
+    requires gson;
+    requires java.sql;
+
 }
