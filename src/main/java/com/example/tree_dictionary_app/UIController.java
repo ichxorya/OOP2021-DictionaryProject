@@ -6,6 +6,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 
+import java.util.Objects;
+
 public class UIController {
 
     DictionaryManagementUI dictionary = new DictionaryManagementUI();
@@ -122,8 +124,15 @@ public class UIController {
      */
     @FXML
     protected void addWord() {
-        dictionary.addWord(addWordEng.getText(), addWordVie.getText());
-        isAddDone.setText("Done");
+        String wordEng = addWordEng.getText();
+        String wordVie = addWordVie.getText();
+
+        if (!Objects.equals(wordEng, "") && !Objects.equals(wordVie, "")) {
+            dictionary.addWord(wordEng, wordVie);
+            isAddDone.setText("Done");
+        }
+
+
     }
 
                     //---------------------------------//
