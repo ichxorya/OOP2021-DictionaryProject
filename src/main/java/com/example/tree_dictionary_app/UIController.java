@@ -130,8 +130,10 @@ public class UIController {
         if (!Objects.equals(wordEng, "") && !Objects.equals(wordVie, "")) {
             dictionary.addWord(wordEng, wordVie);
             isAddDone.setText("Done");
+        } else {
+            isAddDone.setText("Input the word and its meaning");
         }
-        
+
 
     }
 

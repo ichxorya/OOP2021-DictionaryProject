@@ -32,103 +32,91 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.tree_dictionary_app.UIController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tree_dictionary_app.UIController">
     <MenuBar VBox.vgrow="NEVER">
         <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" text="New"/>
-            <MenuItem mnemonicParsing="false" text="Open…"/>
-            <Menu mnemonicParsing="false" text="Open Recent"/>
-            <SeparatorMenuItem mnemonicParsing="false"/>
-            <MenuItem mnemonicParsing="false" text="Close"/>
-            <MenuItem mnemonicParsing="false" text="Save"/>
-            <MenuItem mnemonicParsing="false" text="Save As…"/>
-            <MenuItem mnemonicParsing="false" text="Revert"/>
-            <SeparatorMenuItem mnemonicParsing="false"/>
-            <MenuItem mnemonicParsing="false" text="Preferences…"/>
-            <SeparatorMenuItem mnemonicParsing="false"/>
-            <MenuItem mnemonicParsing="false" text="Quit"/>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp"/>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
         </Menu>
     </MenuBar>
     <AnchorPane VBox.vgrow="ALWAYS">
         <TabPane prefHeight="375.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
             <Tab text="Search Word">
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <TextField fx:id="engFieldWord" layoutX="237.0" layoutY="72.0"
-                               onKeyTyped="#clearVieWord"/>
-                    <TextField fx:id="vieFieldWord" layoutX="237.0" layoutY="230.0"
-                               onKeyTyped="#clearWEngWord"/>
-                    <Label layoutX="158.0" layoutY="76.0" text="English Word"/>
-                    <Label layoutX="134.0" layoutY="234.0" text="Vietnamese Word"/>
-                    <Button layoutX="278.0" layoutY="154.0" mnemonicParsing="false"
-                            onAction="#searchWord" text="Translate"/>
+                    <TextField fx:id="engFieldWord" layoutX="237.0" layoutY="72.0" onKeyTyped="#clearVieWord" />
+                    <TextField fx:id="vieFieldWord" layoutX="237.0" layoutY="230.0" onKeyTyped="#clearWEngWord" />
+                    <Label layoutX="158.0" layoutY="76.0" text="English Word" />
+                    <Label layoutX="134.0" layoutY="234.0" text="Vietnamese Word" />
+                    <Button layoutX="288.0" layoutY="147.0" mnemonicParsing="false" onAction="#searchWord" text="Translate" />
+               <Button layoutX="409.0" layoutY="72.0" mnemonicParsing="false" text="EN🔊" />
+               <Button layoutX="408.0" layoutY="230.0" mnemonicParsing="false" text="VN🔊" />
                 </AnchorPane>
             </Tab>
             <Tab text="Search Part">
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <TextField fx:id="engFieldPart" layoutX="50.0" layoutY="48.0"
-                               onKeyTyped="#searchPartEng"/>
-                    <TextField fx:id="vieFieldPart" layoutX="435.0" layoutY="48.0"
-                               onKeyTyped="#searchPartVie"/>
-                    <TextArea fx:id="engAreaPart" layoutX="50.0" layoutY="93.0" prefHeight="200.0"
-                              prefWidth="200.0" text="&#10;"/>
-                    <TextArea fx:id="vieAreaPart" layoutX="384.0" layoutY="93.0" prefHeight="200.0"
-                              prefWidth="200.0"/>
-                    <Label layoutX="50.0" layoutY="14.0" text="English"/>
-                    <Label layoutX="522.0" layoutY="14.0" text="Vietnamese"/>
+                    <TextField fx:id="engFieldPart" layoutX="50.0" layoutY="48.0" onKeyTyped="#searchPartEng" />
+                    <TextField fx:id="vieFieldPart" layoutX="435.0" layoutY="48.0" onKeyTyped="#searchPartVie" />
+                    <TextArea fx:id="engAreaPart" layoutX="50.0" layoutY="93.0" prefHeight="200.0" prefWidth="200.0" text="&#10;" />
+                    <TextArea fx:id="vieAreaPart" layoutX="384.0" layoutY="93.0" prefHeight="200.0" prefWidth="200.0" />
+                    <Label layoutX="50.0" layoutY="14.0" text="English" />
+                    <Label layoutX="522.0" layoutY="14.0" text="Vietnamese" />
                 </AnchorPane>
             </Tab>
             <Tab onSelectionChanged="#toggleReady" text="Edit Dictionary">
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <Label layoutX="14.0" layoutY="14.0" text="Add Word"/>
-                    <Button layoutX="548.0" layoutY="10.0" mnemonicParsing="false" onAction="#addWord"
-                            text="Add"/>
-                    <Label layoutX="16.0" layoutY="74.0" text="Delete Word"/>
-                    <TextField fx:id="addWordEng" layoutX="125.0" layoutY="10.0"
-                               promptText="input English Word"/>
-                    <TextField fx:id="addWordVie" layoutX="348.0" layoutY="10.0"
-                               promptText="Input Vietnamese Word"/>
-                    <TextField fx:id="deleteWordEng" layoutX="123.0" layoutY="71.0"
-                               promptText="input English Word"/>
-                    <TextField fx:id="deleteWordVie" layoutX="346.0" layoutY="74.0"
-                               promptText="Input Vietnamese Word"/>
-                    <Button layoutX="542.0" layoutY="75.0" mnemonicParsing="false"
-                            onAction="#deleteWord" text="Delete"/>
-                    <Label layoutX="14.0" layoutY="130.0" text="Modify Word"/>
-                    <ToggleButton fx:id="togEng" layoutX="123.0" layoutY="127.0" mnemonicParsing="false"
-                                  onAction="#setTogEng" prefHeight="22.0" prefWidth="81.0"
-                                  text="English"/>
-                    <ToggleButton fx:id="togVie" layoutX="227.0" layoutY="128.0" mnemonicParsing="false"
-                                  onAction="#setTogVie" text="Vietnamese"/>
-                    <Label layoutX="14.0" layoutY="195.0" text="Modify Word"/>
-                    <Label layoutX="14.0" layoutY="264.0" text="Modify Meaning"/>
-                    <TextField fx:id="modWordOld" layoutX="123.0" layoutY="192.0"
-                               promptText="input old word"/>
-                    <TextField fx:id="modMeanOld" layoutX="123.0" layoutY="260.0"
-                               promptText="input old meaning"/>
-                    <TextField fx:id="modWordNew" layoutX="346.0" layoutY="192.0"
-                               promptText="input new word"/>
-                    <TextField fx:id="modMeanNew" layoutX="346.0" layoutY="259.0"
-                               promptText="input old meaning"/>
-                    <Button layoutX="542.0" layoutY="193.0" mnemonicParsing="false"
-                            onAction="#modifyWord" text="Modify"/>
-                    <Button layoutX="542.0" layoutY="261.0" mnemonicParsing="false"
-                            onAction="#modifyMeaning" text="Modify"/>
-                    <Label fx:id="isAddDone" layoutX="125.0" layoutY="44.0"/>
-                    <Label fx:id="isModWordDone" layoutX="125.0" layoutY="226.0"/>
-                    <Label fx:id="isModMeanDone" layoutX="125.0" layoutY="296.0"/>
-                    <Label fx:id="isDelDone" layoutX="125.0" layoutY="98.0"/>
-                    <Button layoutX="493.0" layoutY="312.0" mnemonicParsing="false"
-                            onAction="#exportToFile" text="Export all words to file"/>
-                    <Button layoutX="336.0" layoutY="312.0" mnemonicParsing="false"
-                            onAction="#importFromFile" text="Import all words from file"/>
-                    <Label fx:id="isExported" layoutX="277.0" layoutY="316.0"/>
+                    <Label layoutX="14.0" layoutY="14.0" text="Add Word" />
+                    <Button layoutX="548.0" layoutY="10.0" mnemonicParsing="false" onAction="#addWord" text="Add" />
+                    <Label layoutX="16.0" layoutY="74.0" text="Delete Word" />
+                    <TextField fx:id="addWordEng" layoutX="123.0" layoutY="10.0" promptText="Input English Word" />
+                    <TextField fx:id="addWordVie" layoutX="348.0" layoutY="10.0" promptText="Input Vietnamese Word" />
+                    <TextField fx:id="deleteWordEng" layoutX="123.0" layoutY="71.0" promptText="Input English Word" />
+                    <TextField fx:id="deleteWordVie" layoutX="346.0" layoutY="74.0" promptText="Input Vietnamese Word" />
+                    <Button layoutX="542.0" layoutY="75.0" mnemonicParsing="false" onAction="#deleteWord" text="Delete" />
+                    <Label layoutX="14.0" layoutY="130.0" text="Modify Word" />
+                    <ToggleButton fx:id="togEng" layoutX="123.0" layoutY="127.0" mnemonicParsing="false" onAction="#setTogEng" prefHeight="22.0" prefWidth="81.0" text="English" />
+                    <ToggleButton fx:id="togVie" layoutX="227.0" layoutY="128.0" mnemonicParsing="false" onAction="#setTogVie" text="Vietnamese" />
+                    <Label layoutX="14.0" layoutY="195.0" text="Modify Word" />
+                    <Label layoutX="14.0" layoutY="264.0" text="Modify Meaning" />
+                    <TextField fx:id="modWordOld" layoutX="123.0" layoutY="192.0" promptText="Input Old Word" />
+                    <TextField fx:id="modMeanOld" layoutX="123.0" layoutY="260.0" promptText="Input Old Meaning" />
+                    <TextField fx:id="modWordNew" layoutX="346.0" layoutY="192.0" promptText="Input New Word" />
+                    <TextField fx:id="modMeanNew" layoutX="346.0" layoutY="259.0" promptText="Input Old Meaning" />
+                    <Button layoutX="542.0" layoutY="193.0" mnemonicParsing="false" onAction="#modifyWord" text="Modify" />
+                    <Button layoutX="542.0" layoutY="261.0" mnemonicParsing="false" onAction="#modifyMeaning" text="Modify" />
+                    <Label fx:id="isAddDone" layoutX="125.0" layoutY="44.0" />
+                    <Label fx:id="isModWordDone" layoutX="125.0" layoutY="226.0" />
+                    <Label fx:id="isModMeanDone" layoutX="125.0" layoutY="296.0" />
+                    <Label fx:id="isDelDone" layoutX="125.0" layoutY="98.0" />
+                    <Button layoutX="493.0" layoutY="312.0" mnemonicParsing="false" onAction="#exportToFile" text="Export all words to file" />
+                    <Button layoutX="336.0" layoutY="312.0" mnemonicParsing="false" onAction="#importFromFile" text="Import all words from file" />
+                    <Label fx:id="isExported" layoutX="277.0" layoutY="316.0" />
                 </AnchorPane>
             </Tab>
         </TabPane>
