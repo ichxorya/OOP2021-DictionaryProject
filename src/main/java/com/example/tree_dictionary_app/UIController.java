@@ -299,17 +299,17 @@ public class UIController {
 
     //----------------------------------------------------------------------------------------------------------------//
 
-    Spelling spelling = new Spelling();
+//    Spelling spelling = new Spelling();
 
     @FXML
     protected void PlaySpelling() throws Exception {
-        String word = engFieldWord.getText();
-        spelling.spellingWord(word);
-
-        //Media media = new Media("http://src/" + word + ".mp3");
-        Media media = new Media(getClass().getResource("src/" + word + ".wav").toExternalForm());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+//        String word = engFieldWord.getText();
+//        spelling.spellingWord(word);
+//
+//        //Media media = new Media("http://src/" + word + ".mp3");
+//        Media media = new Media(getClass().getResource("src/" + word + ".wav").toExternalForm());
+//        MediaPlayer mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
 
         //AudioClip media = new AudioClip(getClass().getResource("/src/%s.wav".formatted(word)).toExternalForm());
         //media.play();

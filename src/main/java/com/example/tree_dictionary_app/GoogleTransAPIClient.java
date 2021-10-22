@@ -11,6 +11,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 public class GoogleTransAPIClient {
+    /* Language Constants */
+    private static final String VN = "vi";
+    private static final String EN = "en";
 
     // Method to encode a string value using UTF-8 encoding scheme
     public static String encodeString(String encodeThis) {
@@ -25,16 +28,24 @@ public class GoogleTransAPIClient {
         }
     }
 
-    public static String callGoogleTrans(String translateThis) {
+    public static String callGoogleTrans(String translateThis, String fromLanguage) {
         // Default query
         final String emptyQueryValue = "%3CREQUIRED%3E";
-        String translateThisQuery = "q=EMPTY&target=vi&source=en";
+        String translateThisQuery = "q=EMPTY&target=TO&source=FROM";
 
         // Finish the query
         if (Objects.equals(translateThisQuery, "")) {
             translateThisQuery = translateThisQuery.replace("EMPTY", emptyQueryValue);
         } else {
             translateThisQuery = translateThisQuery.replace("EMPTY", translateThis);
+        }
+
+        if (fromLanguage.equals(EN)) {
+            translateThisQuery = translateThisQuery.replace("FROM", EN);
+            translateThisQuery = translateThisQuery.replace("TO", VN);
+        } else {
+            translateThisQuery = translateThisQuery.replace("FROM", VN);
+            translateThisQuery = translateThisQuery.replace("TO", EN);
         }
 
         // Json format: {"data":{"translations":[{"translatedText":"TRANSLATED WORD"}]}}
@@ -55,6 +66,6 @@ public class GoogleTransAPIClient {
     }
 
     public static void main(String[] args) {
-        System.out.println(callGoogleTrans("bro"));
+        System.out.println(callGoogleTrans("bố", VN));
     }
 }
