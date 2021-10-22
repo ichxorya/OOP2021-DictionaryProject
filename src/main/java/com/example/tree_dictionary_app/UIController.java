@@ -5,8 +5,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+
+import java.util.Objects;
 
 public class UIController {
 
@@ -124,8 +127,17 @@ public class UIController {
      */
     @FXML
     protected void addWord() {
-        dictionary.addWord(addWordEng.getText(), addWordVie.getText());
-        isAddDone.setText("Done");
+        String wordEng = addWordEng.getText();
+        String wordVie = addWordVie.getText();
+
+        boolean bothNotEmpty = !Objects.equals(wordEng, "") && !Objects.equals(wordVie, "");
+
+        if (bothNotEmpty) {
+            dictionary.addWord(wordEng, wordVie);
+            isAddDone.setText("Done");
+        } else {
+            isAddDone.setText("Input the word and its meaning");
+        }
     }
 
                     //---------------------------------//
@@ -206,14 +218,23 @@ public class UIController {
      */
     @FXML
     protected void modifyWord() {
-        if (togEng.isSelected()) {
-            isModWordDone.setText(
-                    dictionary.dictionaryModWord(
-                            modWordOld.getText(), modWordNew.getText(), dictionary.dictionaryEng));
+        String modWordOldStr = modWordOld.getText();
+        String modWordNewStr = modWordNew.getText();
+
+        boolean bothNotEmpty = (!Objects.equals(modWordOldStr, "") && !Objects.equals(modWordNewStr, ""));
+
+        if (bothNotEmpty) {
+            if (togEng.isSelected()) {
+                isModWordDone.setText(
+                        dictionary.dictionaryModWord(
+                                modWordOldStr, modWordNewStr, dictionary.dictionaryEng));
+            } else {
+                isModWordDone.setText(
+                        dictionary.dictionaryModWord(
+                                modWordOldStr, modWordNewStr, dictionary.dictionaryVie));
+            }
         } else {
-            isModWordDone.setText(
-                    dictionary.dictionaryModWord(
-                            modWordOld.getText(), modWordNew.getText(), dictionary.dictionaryVie));
+            isModWordDone.setText("Input both old and new word");
         }
     }
 
@@ -233,14 +254,23 @@ public class UIController {
      */
     @FXML
     protected void modifyMeaning() {
-        if (togEng.isSelected()) {
-            isModMeanDone.setText(
-                    dictionary.dictionaryModMeaning(
-                            modMeanOld.getText(), modMeanNew.getText(), dictionary.dictionaryEng));
+        String modMeanOldStr = modMeanOld.getText();
+        String modMeanNewStr = modMeanNew.getText();
+
+        boolean bothNotEmpty = (!Objects.equals(modMeanOldStr, "") && !Objects.equals(modMeanNewStr, ""));
+
+        if (bothNotEmpty) {
+            if (togEng.isSelected()) {
+                isModMeanDone.setText(
+                        dictionary.dictionaryModMeaning(
+                                modMeanOldStr, modMeanNewStr, dictionary.dictionaryEng));
+            } else {
+                isModMeanDone.setText(
+                        dictionary.dictionaryModMeaning(
+                                modMeanOldStr, modMeanNewStr, dictionary.dictionaryVie));
+            }
         } else {
-            isModMeanDone.setText(
-                    dictionary.dictionaryModMeaning(
-                            modMeanOld.getText(), modMeanNew.getText(), dictionary.dictionaryVie));
+            isModMeanDone.setText("Input both old and new meaning of the word");
         }
     }
 
@@ -273,13 +303,17 @@ public class UIController {
 
     @FXML
     protected void PlaySpelling() throws Exception {
-        spelling.spellingWord(engFieldWord.getText());
+        String word = engFieldWord.getText();
+        spelling.spellingWord(word);
 
-        Media media = new Media("src\\voice.wav");
+        //Media media = new Media("http://src/" + word + ".mp3");
+        Media media = new Media(getClass().getResource("src/" + word + ".wav").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
 
-    }
+        //AudioClip media = new AudioClip(getClass().getResource("/src/%s.wav".formatted(word)).toExternalForm());
+        //media.play();
 
+    }
     //----------------------------------------------------------------------------------------------------------------//
 }
