@@ -1,7 +1,5 @@
 package com.example.tree_dictionary_app;
 
-import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
@@ -15,26 +13,13 @@ public class GoogleTransAPIClient {
     static final String VN = "vi";
     static final String EN = "en";
 
-    // Method to encode a string value using UTF-8 encoding scheme
-    public static String encodeString(String encodeThis) {
-        try {
-            encodeThis = URLEncoder.encode(encodeThis, StandardCharsets.UTF_8.toString());
-            // Replace encoded-spaces '+' with '%20'
-            encodeThis = encodeThis.replace("+", "%20");
-
-            return encodeThis;
-        } catch (UnsupportedEncodingException ex) {
-            throw new RuntimeException(ex.getCause());
-        }
-    }
-
     public static String callGoogleTrans(String translateThis, String toLanguage) {
         // Default query
         // final String emptyQueryValue = "%3CREQUIRED%3E";     Can be excluded
         String translateThisQuery = "q=EMPTY&target=TO&source=FROM";
 
         // Finish the query
-        if (Objects.equals(translateThisQuery, "")) {
+        if (Objects.equals(translateThis, "")) {
 //            translateThisQuery = translateThisQuery.replace("EMPTY", emptyQueryValue);
             return "";  // Return an empty String if the input is empty.
         } else {

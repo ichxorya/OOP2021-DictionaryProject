@@ -1,7 +1,9 @@
 module com.example.tree_dictionary_app {
+    requires javafx.swing;
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires javafx.media;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -15,9 +17,5 @@ module com.example.tree_dictionary_app {
 
     //needed for HTTP
     requires unirest.java;
-
-    //needed for JSON
-    requires gson;
-    requires java.sql;
 
 }
