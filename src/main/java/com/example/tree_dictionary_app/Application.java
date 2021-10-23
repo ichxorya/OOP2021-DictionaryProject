@@ -15,13 +15,13 @@ public class Application extends javafx.application.Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Dictionary!");
         stage.setScene(scene);
-        stage.getIcons().add(getIcon());
+        stage.getIcons().add(appIcon());
 
         stage.show();
 
     }
 
-    private Image getIcon() {
+    private Image appIcon() {
         return new Image(
                             Objects.requireNonNull(
                                 Application.class.getResourceAsStream("deathnote_icon.png")
