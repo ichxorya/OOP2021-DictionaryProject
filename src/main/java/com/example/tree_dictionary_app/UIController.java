@@ -304,10 +304,11 @@ public class UIController {
     @FXML
     protected void PlaySpelling() throws Exception {
         String word = engFieldWord.getText();
-        spelling.spellingWord(word);
+        //spelling.spellingWord(word);
 
         //Media media = new Media("http://src/" + word + ".mp3");
-        Media media = new Media(getClass().getResource("src/" + word + ".wav").toExternalForm());
+        //Media media = new Media(getClass().getResource("src/" + word + ".wav").toExternalForm());
+        Media media = new Media(ClassLoader.getSystemResource("/src/" + word + ".wav").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
 
