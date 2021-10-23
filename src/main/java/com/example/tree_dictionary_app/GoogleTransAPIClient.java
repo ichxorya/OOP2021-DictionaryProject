@@ -9,11 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
-/**
- *  Ghi chú: Có lẽ mỗi lần compile chúng ta sẽ pay 1 lượt gọi từ (max 500 một tháng).
- *  Để chuẩn bị, trừ khi viết tính năng mới hay debug, đừng dùng hàm này.
- *  Cảm ơn~
- */
+
 public class GoogleTransAPIClient {
     /* Language Constants */
     private static final String VN = "vi";
