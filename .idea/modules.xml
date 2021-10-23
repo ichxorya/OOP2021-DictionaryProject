@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Tree_Dictionary_App.iml" filepath="$PROJECT_DIR$/Tree_Dictionary_App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ourTreeDictionary.iml" filepath="$PROJECT_DIR$/ourTreeDictionary.iml" />
     </modules>
   </component>
 </project>

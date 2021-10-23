@@ -1,10 +1,11 @@
-module com.example.tree_dictionary_app {
+module uet.oop.ourtreedictionary {
     requires javafx.swing;
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
     requires javafx.media;
 
+    requires voicerss.tts;
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires validatorfx;
@@ -12,10 +13,9 @@ module com.example.tree_dictionary_app {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens com.example.tree_dictionary_app to javafx.fxml;
-    exports com.example.tree_dictionary_app;
+    opens uet.oop.ourtreedictionary to javafx.fxml;
+    exports uet.oop.ourtreedictionary;
 
     //needed for HTTP
     requires unirest.java;
-
 }
