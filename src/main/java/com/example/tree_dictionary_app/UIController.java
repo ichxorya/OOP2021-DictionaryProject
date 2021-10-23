@@ -353,8 +353,8 @@ public class UIController {
     /**
      * Translate a word (using GoogleTransAPI).
      */
-    String translateThisWord;
-    String translatedWord;
+    String translateThisWord = "";
+    String translatedWord = "";
 
     @FXML
     protected void useGoogleTransAPI() {
