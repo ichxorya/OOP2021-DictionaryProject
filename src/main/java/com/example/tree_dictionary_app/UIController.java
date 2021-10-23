@@ -5,9 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 import java.util.Objects;
 
@@ -48,7 +45,7 @@ public class UIController {
      * Clear other field when this field's text change.
      */
     @FXML
-    protected void clearWEngWord() {
+    protected void clearEngWord() {
         engFieldWord.setText("");
     }
 
@@ -299,6 +296,59 @@ public class UIController {
 
     //----------------------------------------------------------------------------------------------------------------//
 
+    @FXML
+    private TextField inputFieldTrans = new TextField();
+
+    @FXML
+    private TextField outputFieldTrans = new TextField();
+
+    /**
+     * Clear other field when this field's text change.
+     */
+    @FXML
+    protected void clearInputField() {
+        outputFieldTrans.setText("");
+    }
+
+    @FXML
+    protected void clearOutputField() {
+        inputFieldTrans.setText("");
+    }
+
+    /**
+     * Toggle stuff support below action.
+     */
+
+    @FXML
+    private ToggleButton togEngTrans = new ToggleButton();
+
+    @FXML
+    private ToggleButton togVieTrans = new ToggleButton();
+
+    /**
+     * Make a English/Vietnamese switch.
+     */
+    @FXML
+    protected void toggleReadyTrans() {
+        togEngTrans.setSelected(false);
+        togVieTrans.setSelected(true);
+    }
+
+    @FXML
+    protected void setTogEngT() {
+        togVieTrans.setSelected(!togEngTrans.isSelected());
+    }
+
+    @FXML
+    protected void setTogVieT() {
+        togEngTrans.setSelected(!togVieTrans.isSelected());
+    }
+
+    //---------------------------------//
+
+
+    //----------------------------------------------------------------------------------------------------------------//
+
 //    Spelling spelling = new Spelling();
 
     @FXML
@@ -315,5 +365,6 @@ public class UIController {
         //media.play();
 
     }
+
     //----------------------------------------------------------------------------------------------------------------//
 }
