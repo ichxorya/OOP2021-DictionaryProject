@@ -1,5 +1,6 @@
 package com.example.tree_dictionary_app;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -301,6 +302,9 @@ public class UIController {
     private Label transStatus = new Label();
 
     @FXML
+    private Label addToDictTrans = new Label();
+
+    @FXML
     private TextField inputFieldTrans = new TextField();
 
     @FXML
@@ -349,10 +353,12 @@ public class UIController {
     /**
      * Translate a word (using GoogleTransAPI).
      */
+    String translateThisWord;
+    String translatedWord;
+
     @FXML
     protected void useGoogleTransAPI() {
-        String translateThisWord = inputFieldTrans.getText();
-        String translatedWord;
+        translateThisWord = inputFieldTrans.getText();
 
         boolean inputNotEmpty = !Objects.equals(translateThisWord, "");
 
@@ -367,6 +373,26 @@ public class UIController {
         } else {
             transStatus.setText("Input the word you want to translate");
         }
+    }
+
+    /**
+     * Add a word and its translation to the dictionary.
+     */
+
+    @FXML
+    protected void addWordTrans() {
+            boolean bothNotEmpty = !Objects.equals(translateThisWord, "") && !Objects.equals(translatedWord, "");
+
+            if (bothNotEmpty) {
+                if (toEngTrans.isSelected()) {
+                    dictionary.addWord(translatedWord, translateThisWord);
+                } else {
+                    dictionary.addWord(translateThisWord, translatedWord);
+                }
+                addToDictTrans.setText("Done");
+            } else {
+                addToDictTrans.setText("Input the word and translate it first");
+            }
     }
 
     //----------------------------------------------------------------------------------------------------------------//
