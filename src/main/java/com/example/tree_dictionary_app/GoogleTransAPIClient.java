@@ -34,12 +34,13 @@ public class GoogleTransAPIClient {
 
     public static String callGoogleTrans(String translateThis, String toLanguage) {
         // Default query
-        final String emptyQueryValue = "%3CREQUIRED%3E";
+        // final String emptyQueryValue = "%3CREQUIRED%3E";     Can be excluded
         String translateThisQuery = "q=EMPTY&target=TO&source=FROM";
 
         // Finish the query
         if (Objects.equals(translateThisQuery, "")) {
-            translateThisQuery = translateThisQuery.replace("EMPTY", emptyQueryValue);
+//            translateThisQuery = translateThisQuery.replace("EMPTY", emptyQueryValue);
+            return "";  // Return an empty String if the input is empty.
         } else {
             translateThisQuery = translateThisQuery.replace("EMPTY", translateThis);
         }
@@ -70,7 +71,7 @@ public class GoogleTransAPIClient {
     }
 
     public static void main(String[] args) {
-        System.out.println(callGoogleTrans("bố", VN));
+        System.out.println(callGoogleTrans("", EN));
     }
 }
 

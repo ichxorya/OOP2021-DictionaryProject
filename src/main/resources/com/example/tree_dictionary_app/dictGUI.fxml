@@ -43,6 +43,7 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tree_dictionary_app.UIController">
     <MenuBar VBox.vgrow="NEVER">
@@ -114,6 +115,11 @@
                      <Label layoutX="150.0" layoutY="208.0" text="Output" />
                      <TextField fx:id="engFieldWord11" layoutX="209.0" layoutY="204.0" onKeyTyped="#clearVieWord" />
                      <Button layoutX="258.0" layoutY="129.0" mnemonicParsing="false" text="Translate" />
+                     <Label layoutX="14.0" layoutY="314.0" text="Powered by Google and Rapidapi">
+                        <font>
+                           <Font name="System Italic" size="12.0" />
+                        </font>
+                     </Label>
                   </children>
                </AnchorPane>
            </content>
