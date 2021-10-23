@@ -5,8 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-
 import java.util.Objects;
+
+import static com.example.tree_dictionary_app.GoogleTransAPIClient.*;
 
 public class UIController {
 
@@ -181,7 +182,7 @@ public class UIController {
     private ToggleButton togVie = new ToggleButton();
 
     /**
-     * Make a English/Vietnamese switch.
+     * Make an English/Vietnamese switch.
      */
     @FXML
     protected void toggleReady() {
@@ -211,7 +212,7 @@ public class UIController {
     private Label isModWordDone = new Label();                      // Label return system respond action success or not
 
     /**
-     * Modify the oldword to new one but keep it meaning.
+     * Modify the word but keep it meaning.
      */
     @FXML
     protected void modifyWord() {
@@ -247,7 +248,7 @@ public class UIController {
     private Label isModMeanDone = new Label();                      // Label return system respond action success or not
 
     /**
-     * Modify the meaning of word to new one.
+     * Modify the meaning of the word.
      */
     @FXML
     protected void modifyMeaning() {
@@ -297,22 +298,21 @@ public class UIController {
     //----------------------------------------------------------------------------------------------------------------//
 
     @FXML
+    private Label transStatus = new Label();
+
+    @FXML
     private TextField inputFieldTrans = new TextField();
 
     @FXML
     private TextField outputFieldTrans = new TextField();
 
     /**
-     * Clear other field when this field's text change.
+     * Clear output field when the input change.
      */
-    @FXML
-    protected void clearInputField() {
-        outputFieldTrans.setText("");
-    }
 
     @FXML
     protected void clearOutputField() {
-        inputFieldTrans.setText("");
+        outputFieldTrans.setText("");
     }
 
     /**
@@ -320,32 +320,54 @@ public class UIController {
      */
 
     @FXML
-    private ToggleButton togEngTrans = new ToggleButton();
+    private ToggleButton toEngTrans = new ToggleButton();
 
     @FXML
-    private ToggleButton togVieTrans = new ToggleButton();
+    private ToggleButton toVietTrans = new ToggleButton();
 
     /**
-     * Make a English/Vietnamese switch.
+     * Make an English/Vietnamese switch.
      */
     @FXML
     protected void toggleReadyTrans() {
-        togEngTrans.setSelected(false);
-        togVieTrans.setSelected(true);
+        toEngTrans.setSelected(false);
+        toVietTrans.setSelected(true);
     }
 
     @FXML
-    protected void setTogEngT() {
-        togVieTrans.setSelected(!togEngTrans.isSelected());
+    protected void setTogEngTrans() {
+        toVietTrans.setSelected(!toEngTrans.isSelected());
     }
 
     @FXML
-    protected void setTogVieT() {
-        togEngTrans.setSelected(!togVieTrans.isSelected());
+    protected void setTogVieTrans() {
+        toEngTrans.setSelected(!toVietTrans.isSelected());
     }
 
     //---------------------------------//
 
+    /**
+     * Translate a word (using GoogleTransAPI).
+     */
+    @FXML
+    protected void useGoogleTransAPI() {
+        String translateThisWord = inputFieldTrans.getText();
+        String translatedWord;
+
+        boolean inputNotEmpty = !Objects.equals(translateThisWord, "");
+
+        if (inputNotEmpty) {
+            if (toEngTrans.isSelected()) {
+                translatedWord = callGoogleTrans(translateThisWord, EN);
+            } else {
+                translatedWord = callGoogleTrans(translateThisWord, VN);
+            }
+            outputFieldTrans.setText(translatedWord);
+            transStatus.setText("The word has been translated");
+        } else {
+            transStatus.setText("Input the word you want to translate");
+        }
+    }
 
     //----------------------------------------------------------------------------------------------------------------//
 

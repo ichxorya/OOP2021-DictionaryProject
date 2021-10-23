@@ -12,8 +12,8 @@ import java.util.Objects;
 
 public class GoogleTransAPIClient {
     /* Language Constants */
-    private static final String VN = "vi";
-    private static final String EN = "en";
+    static final String VN = "vi";
+    static final String EN = "en";
 
     // Method to encode a string value using UTF-8 encoding scheme
     public static String encodeString(String encodeThis) {

@@ -110,16 +110,17 @@
                      <Label layoutX="145.0" layoutY="68.0" text="Translate" />
                      <TextField fx:id="inputFieldTrans" layoutX="209.0" layoutY="64.0" onKeyTyped="#clearOutputField" />
                      <Label layoutX="383.0" layoutY="68.0" text="into" />
-                     <ToggleButton fx:id="togEngTrans" layoutX="428.0" layoutY="64.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="English" />
-                     <ToggleButton fx:id="togVieTrans" layoutX="428.0" layoutY="103.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Vietnamese" />
+                     <ToggleButton fx:id="toEngTrans" layoutX="428.0" layoutY="64.0" mnemonicParsing="false" onAction="#setTogEngTrans" prefHeight="26.0" prefWidth="102.0" text="English" />
+                     <ToggleButton fx:id="toVietTrans" layoutX="428.0" layoutY="103.0" mnemonicParsing="false" onAction="#setTogVieTrans" prefHeight="26.0" prefWidth="102.0" text="Vietnamese" />
                      <Label layoutX="150.0" layoutY="208.0" text="Output" />
-                     <TextField fx:id="outputFieldTrans" layoutX="209.0" layoutY="204.0" onKeyTyped="#clearInputField" />
-                     <Button layoutX="258.0" layoutY="129.0" mnemonicParsing="false" text="Translate" />
+                     <TextField fx:id="outputFieldTrans" layoutX="209.0" layoutY="204.0" />
+                     <Button layoutX="258.0" layoutY="129.0" mnemonicParsing="false" onAction="#useGoogleTransAPI" text="Translate" />
                      <Label layoutX="14.0" layoutY="314.0" text="Powered by Google and Rapidapi">
                         <font>
                            <Font name="System Italic" size="12.0" />
                         </font>
                      </Label>
+                     <Label fx:id="transStatus" layoutX="209.0" layoutY="94.0" text="" />
                   </children>
                </AnchorPane>
            </content>
