@@ -53,11 +53,13 @@
             <Tab text="Search Words">
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <TextField fx:id="engFieldWord" layoutX="237.0" layoutY="72.0" onKeyTyped="#clearVieWord" />
-               <Button mnemonicParsing="false" onAction="#PlaySpelling" text="Button" />
+               <Button layoutX="27.0" layoutY="14.0" mnemonicParsing="false" onAction="#PlaySpelling" text="SpellingTest" />
                     <TextField fx:id="vieFieldWord" layoutX="237.0" layoutY="230.0" onKeyTyped="#clearWEngWord" />
                     <Label layoutX="158.0" layoutY="76.0" text="English Word" />
                     <Label layoutX="134.0" layoutY="234.0" text="Vietnamese Word" />
                     <Button layoutX="278.0" layoutY="154.0" mnemonicParsing="false" onAction="#searchWord" text="Translate" />
+               <Button layoutX="401.0" layoutY="72.0" mnemonicParsing="false" text="EN🔊" />
+               <Button layoutX="400.0" layoutY="230.0" mnemonicParsing="false" text="VN🔊" />
                 </AnchorPane>
             </Tab>
             <Tab text="Search from Part">
@@ -100,6 +102,22 @@
                     <Label fx:id="isExported" layoutX="277.0" layoutY="316.0" />
                 </AnchorPane>
             </Tab>
+         <Tab text="Google Translator">
+           <content>
+             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <Label layoutX="145.0" layoutY="68.0" text="Translate" />
+                     <TextField fx:id="engFieldWord1" layoutX="209.0" layoutY="64.0" onKeyTyped="#clearVieWord" />
+                     <Label layoutX="383.0" layoutY="68.0" text="into" />
+                     <ToggleButton layoutX="428.0" layoutY="64.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="English" />
+                     <ToggleButton layoutX="428.0" layoutY="103.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Vietnamese" />
+                     <Label layoutX="150.0" layoutY="208.0" text="Output" />
+                     <TextField fx:id="engFieldWord11" layoutX="209.0" layoutY="204.0" onKeyTyped="#clearVieWord" />
+                     <Button layoutX="258.0" layoutY="129.0" mnemonicParsing="false" text="Translate" />
+                  </children>
+               </AnchorPane>
+           </content>
+         </Tab>
         </TabPane>
     </AnchorPane>
 </VBox>
