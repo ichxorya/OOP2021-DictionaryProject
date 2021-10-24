@@ -6,3 +6,5 @@ Versions:
 - main: primitive commandline dictionary (???)
 - betaN: updated insertFromCommandline()
 - betaQ: implementing a tree data structure for the dictionary (maybe have better performence).
+
+Outdated!!!
