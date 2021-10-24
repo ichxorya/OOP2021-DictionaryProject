@@ -31,8 +31,14 @@ public class UIController {
      */
     @FXML
     protected void searchWord() {
-        String wordEn = engFieldWord.getText();
-        String wordVi = vieFieldWord.getText();
+        String wordEn = "";
+        String wordVi = "";
+        if (!engFieldWord.getText().equals("")) {
+            wordEn = DictionaryUtilities.standardize(engFieldWord.getText());
+        }
+        if (!vieFieldWord.getText().equals("")) {
+            wordVi = DictionaryUtilities.standardize(vieFieldWord.getText());
+        }
         if (!wordEn.equals("") && wordVi.equals("")) {
             vieFieldWord.setText(dictionary.dictionaryLookup(wordEn, dictionary.dictionaryEng));
         } else if (wordEn.equals("") && !wordVi.equals("")) {
@@ -79,7 +85,7 @@ public class UIController {
      */
     @FXML
     protected void searchPartEng() {
-        String word = engFieldPart.getText();
+        String word = DictionaryUtilities.standardize(engFieldPart.getText());
         if (word.equals("")) {
             engAreaPart.setText("");
             vieAreaPart.setText("");
@@ -95,7 +101,7 @@ public class UIController {
      */
     @FXML
     protected void searchPartVie() {
-        String word = vieFieldPart.getText();
+        String word = DictionaryUtilities.standardize(vieFieldPart.getText());
         if (word.equals("")) {
             engAreaPart.setText("");
             vieAreaPart.setText("");
@@ -126,8 +132,8 @@ public class UIController {
      */
     @FXML
     protected void addWord() {
-        String wordEng = addWordEng.getText();
-        String wordVie = addWordVie.getText();
+        String wordEng = DictionaryUtilities.standardize(addWordEng.getText());
+        String wordVie = DictionaryUtilities.standardize(addWordVie.getText());
 
         boolean bothNotEmpty = !Objects.equals(wordEng, "") && !Objects.equals(wordVie, "");
 
@@ -159,8 +165,8 @@ public class UIController {
      */
     @FXML
     protected void deleteWord() {
-        String wEng = deleteWordEng.getText();
-        String wVie = deleteWordVie.getText();
+        String wEng = DictionaryUtilities.standardize(deleteWordEng.getText());
+        String wVie = DictionaryUtilities.standardize(deleteWordVie.getText());
         if (!wEng.equals("") && wVie.equals("")) {
             isDelDone.setText(dictionary.deleteWord(wEng, dictionary.dictionaryEng));
         } else if (wEng.equals("") && !wVie.equals("")) {
@@ -217,8 +223,8 @@ public class UIController {
      */
     @FXML
     protected void modifyWord() {
-        String modWordOldStr = modWordOld.getText();
-        String modWordNewStr = modWordNew.getText();
+        String modWordOldStr = DictionaryUtilities.standardize(modWordOld.getText());
+        String modWordNewStr = DictionaryUtilities.standardize(modWordNew.getText());
 
         boolean bothNotEmpty = (!Objects.equals(modWordOldStr, "") && !Objects.equals(modWordNewStr, ""));
 
@@ -253,8 +259,8 @@ public class UIController {
      */
     @FXML
     protected void modifyMeaning() {
-        String modMeanOldStr = modMeanOld.getText();
-        String modMeanNewStr = modMeanNew.getText();
+        String modMeanOldStr = DictionaryUtilities.standardize(modMeanOld.getText());
+        String modMeanNewStr = DictionaryUtilities.standardize(modMeanNew.getText());
 
         boolean bothNotEmpty = (!Objects.equals(modMeanOldStr, "") && !Objects.equals(modMeanNewStr, ""));
 
@@ -358,7 +364,7 @@ public class UIController {
 
     @FXML
     protected void useGoogleTransAPI() {
-        translateThisWord = inputFieldTrans.getText();
+        translateThisWord = DictionaryUtilities.standardize(inputFieldTrans.getText());
 
         boolean inputNotEmpty = !Objects.equals(translateThisWord, "");
 

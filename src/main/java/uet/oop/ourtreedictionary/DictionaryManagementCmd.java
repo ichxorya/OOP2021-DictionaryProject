@@ -195,6 +195,7 @@ public class DictionaryManagementCmd {
                 dictionaryEng.deleteWord(mean);
                 dictionaryVie.deleteWord(word);
             }
+            System.out.println("Done");
         }
     }
 
@@ -219,7 +220,7 @@ public class DictionaryManagementCmd {
                 dictionaryVie.addWord(word, newMean);
                 dictionaryEng.addWord(newMean, word);
             }
-
+            System.out.println("Done");
         }
     }
 
@@ -244,6 +245,7 @@ public class DictionaryManagementCmd {
                 dictionaryVie.addWord(newWord, mean);
                 dictionaryEng.addWord(mean, newWord);
             }
+            System.out.println("Done");
         }
     }
 
@@ -322,6 +324,7 @@ public class DictionaryManagementCmd {
                 //Input
                 dictionaryEng.addWord(wordEng, wordVie);
                 dictionaryVie.addWord(wordVie, wordEng);
+                System.out.println("Done");
             }
         } catch (IOException e) {
             System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
@@ -340,7 +343,7 @@ public class DictionaryManagementCmd {
         Date today = new Date();
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
         String strDate= dateFormatter.format(today);
-        String dictFileName = String.format("output%s.txt", strDate);
+        String dictFileName = String.format("src/output%s.txt", strDate);
 
         try (BufferedWriter out = new BufferedWriter(new FileWriter(dictFileName))) {
             ArrayList<String> dictToFile = new ArrayList<>();

@@ -85,7 +85,7 @@ public class DictChar {
             if (word.length() == 1) {
                 this.afterChar.add(new DictChar(ch, meaning));
             } else {
-                this.afterChar.add(new DictChar(ch, ""));
+                this.afterChar.add(new DictChar(ch, " "));
                 this.afterChar.get(this.afterChar.size() - 1).addWord(word.substring(1), meaning);
             }
         } else {
@@ -110,8 +110,10 @@ public class DictChar {
         for (int i = 0; i < afterChar.size(); i++) {
             if (afterChar.get(i).getCharacter() == ch) {
                 if (inputWord.length() == 1) {
-                    afterChar.remove(i);
-                    return "Found and deleted!";
+                    if (!afterChar.get(i).meaning.equals(" ")) {
+                        afterChar.remove(i);
+                        return "Found and deleted!";
+                    }
                 } else {
                     String res =  afterChar.get(i).deleteWord(inputWord.substring(1));
                     if (res.equals("Found and deleted!") && afterChar.get(i).afterChar.size() == 0) {
@@ -137,7 +139,9 @@ public class DictChar {
         for (DictChar dictChar : afterChar) {
             if (dictChar.getCharacter() == ch) {
                 if (inputWord.length() == 1) {
-                    return dictChar.getMeaning();
+                    if (!dictChar.getMeaning().equals(" ")) {
+                        return dictChar.getMeaning();
+                    }
                 } else {
                     return dictChar.searchWord(inputWord.substring(1));
                 }
@@ -176,7 +180,7 @@ public class DictChar {
      */
     int printAll(String wordForm, int index) {
         wordForm += getCharacter();
-        if (!getMeaning().equals("")) {
+        if (!getMeaning().equals(" ")) {
             index += 1;
             DictionaryUtilities.formatStringAndPrint(index, wordForm, getMeaning());
         }
@@ -192,7 +196,7 @@ public class DictChar {
 
     String printAllWord(String wordForm, String listWord) {
         wordForm += getCharacter();
-        if (!getMeaning().equals("")) {
+        if (!getMeaning().equals(" ")) {
             listWord += wordForm + "\n";
         }
         if (afterChar.size() != 0) {
@@ -205,7 +209,7 @@ public class DictChar {
 
     String printAllMean(String wordForm, String listWord) {
         wordForm += getCharacter();
-        if (!getMeaning().equals("")) {
+        if (!getMeaning().equals(" ")) {
             listWord += getMeaning() + "\n";
         }
         if (afterChar.size() != 0) {
@@ -225,7 +229,7 @@ public class DictChar {
     int dictToFileFiller(ArrayList<String> dictToFile, String wordForm, int index) {
         wordForm += getCharacter();
 
-        if (!getMeaning().equals("")) {
+        if (!getMeaning().equals(" ")) {
             index += 1;
             dictToFile.add(DictionaryUtilities.formatStringAndReturn(index, wordForm, getMeaning()));
         }
