@@ -5,7 +5,6 @@ module uet.oop.ourtreedictionary {
     requires javafx.web;
     requires javafx.media;
 
-    requires voicerss.tts;
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires validatorfx;
@@ -18,4 +17,6 @@ module uet.oop.ourtreedictionary {
 
     //needed for HTTP
     requires unirest.java;
+    requires jsapi;
+    requires freetts;
 }

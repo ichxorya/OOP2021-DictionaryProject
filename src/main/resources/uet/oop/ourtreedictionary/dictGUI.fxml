@@ -22,13 +22,11 @@
             <Tab text="Search Words">
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <TextField fx:id="engFieldWord" layoutX="237.0" layoutY="72.0" onKeyTyped="#clearVieWord" />
-               <Button layoutX="27.0" layoutY="14.0" mnemonicParsing="false" onAction="#PlaySpelling" text="SpellingTest" />
                     <TextField fx:id="vieFieldWord" layoutX="237.0" layoutY="230.0" onKeyTyped="#clearEngWord" />
                     <Label layoutX="158.0" layoutY="76.0" text="English Word" />
                     <Label layoutX="134.0" layoutY="234.0" text="Vietnamese Word" />
                     <Button layoutX="278.0" layoutY="154.0" mnemonicParsing="false" onAction="#searchWord" text="Translate" />
-               <Button layoutX="401.0" layoutY="72.0" mnemonicParsing="false" text="EN🔊" />
-               <Button layoutX="400.0" layoutY="230.0" mnemonicParsing="false" text="VN🔊" />
+               <Button layoutX="401.0" layoutY="72.0" mnemonicParsing="false" onAction="#playEngAudio" text="EN🔊" />
                 </AnchorPane>
             </Tab>
             <Tab text="Search from Part">

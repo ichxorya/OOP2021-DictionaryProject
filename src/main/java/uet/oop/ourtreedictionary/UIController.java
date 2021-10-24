@@ -400,15 +400,13 @@ public class UIController {
 
     //----------------------------------------------------------------------------------------------------------------//
 
-//    Spelling spelling = new Spelling();
-
     @FXML
-    protected void PlaySpelling() throws Exception {
-        try {
-            Media media = new Media(Objects.requireNonNull(Application.class.getResource("voice.wav")).toExternalForm());
+    protected void playEngAudio() throws Exception {
+        String wordEn = "";
+        wordEn = engFieldWord.getText();
 
-        } catch (Exception e) {
-            System.out.println("E");
+        if (!wordEn.equals("")) {
+            DictAudio audio = new DictAudio(wordEn);
         }
     }
 

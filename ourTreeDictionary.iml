@@ -40,6 +40,8 @@
     <orderEntry type="library" exported="" name="Maven: org.openjfx:javafx-media:17-ea+11" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.openjfx:javafx-media:win:17-ea+11" level="project" />
     <orderEntry type="library" exported="" name="Maven: commons-io:commons-io:2.6" level="project" />
-    <orderEntry type="library" exported="" name="VoiceRSS" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.openjfx:javafx-base:11.0.2" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.openjfx:javafx-graphics:17-ea+11" level="project" />
+    <orderEntry type="library" exported="" name="FreeTTS" level="project" />
   </component>
 </module>
