@@ -9,25 +9,24 @@ public class DictAudio {
     VoiceManager freeVM;
     Voice voice;
 
-    public DictAudio(String words) {
+    public DictAudio() {
         System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
         voice = VoiceManager.getInstance().getVoice("kevin16");
         if (voice != null) {
             voice.allocate();
-            try {
-                voice.setRate(190);
-                voice.setPitch(150);
-                voice.setVolume(3);
-                SpeakText(words);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         } else {
             throw new IllegalStateException("Cannot find voice: kevin16");
         }
     }
 
-    private void SpeakText(String words) {
-        voice.speak(words);
+    public void play(String word) {
+        try {
+            voice.setRate(190);
+            voice.setPitch(150);
+            voice.setVolume(3);
+            voice.speak(word);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

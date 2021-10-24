@@ -16,6 +16,7 @@ import static uet.oop.ourtreedictionary.GoogleTransAPIClient.*;
 public class UIController {
 
     DictionaryManagementUI dictionary = new DictionaryManagementUI();
+    DictAudio audio = new DictAudio();
 
     //-----------------------------------------------------------------------------------------------------------------------------//
 
@@ -406,7 +407,7 @@ public class UIController {
         wordEn = engFieldWord.getText();
 
         if (!wordEn.equals("")) {
-            DictAudio audio = new DictAudio(wordEn);
+            audio.play(wordEn);
         }
     }
 
