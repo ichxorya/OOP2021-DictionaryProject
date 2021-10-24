@@ -25,7 +25,7 @@ public class DictionaryUtilities {
      * 2    | Uncle      | Chú
      * 3    | Zoo        | Vườn thú
      */
-    static String formatStringAndPrint(int index, String firstWord, String secondWord) {
+    static void formatStringAndPrint(int index, String firstWord, String secondWord) {
         /* Space-padding */
         String indexStr = index + "";
         firstWord = "|" + firstWord;
@@ -33,7 +33,7 @@ public class DictionaryUtilities {
 
         indexStr = String.format("%" + 5 + "s", indexStr);
         firstWord = String.format("%" + (-13) + "s", firstWord);
-        return indexStr + firstWord + secondWord;
+        System.out.println(indexStr + firstWord + secondWord);
     }
 
     /**
@@ -48,22 +48,6 @@ public class DictionaryUtilities {
         indexStr = String.format("%" + 5 + "s", indexStr);
         firstWord = String.format("%" + (-13) + "s", firstWord);
         return (indexStr + firstWord + secondWord);
-    }
-
-    @Deprecated
-    /* Replaced with more efficient method. */
-    static void formatStringAndPrint_Old(int index, String firstWord, String secondWord) {
-        /* Space-padding */
-        String indexStr = index + "";
-        firstWord = "| " + firstWord;
-        secondWord = "| " + secondWord;
-        while (indexStr.length() < 5) {
-            indexStr += ' ';
-        }
-        while ((indexStr + firstWord).length() < 18) {
-            firstWord += ' ';
-        }
-        System.out.println(indexStr + firstWord + secondWord);
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------//

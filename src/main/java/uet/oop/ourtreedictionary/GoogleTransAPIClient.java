@@ -3,9 +3,6 @@ package uet.oop.ourtreedictionary;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 public class GoogleTransAPIClient {

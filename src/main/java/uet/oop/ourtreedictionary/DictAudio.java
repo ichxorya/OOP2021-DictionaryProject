@@ -5,8 +5,6 @@ import com.sun.speech.freetts.VoiceManager;
 
 public class DictAudio {
 
-    String voiceName = "kevin16";
-    VoiceManager freeVM;
     Voice voice;
 
     public DictAudio() {

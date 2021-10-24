@@ -1,13 +1,9 @@
 package uet.oop.ourtreedictionary;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 import java.util.Objects;
 
@@ -402,8 +398,8 @@ public class UIController {
     //----------------------------------------------------------------------------------------------------------------//
 
     @FXML
-    protected void playEngAudio() throws Exception {
-        String wordEn = "";
+    protected void playEngAudio() {
+        String wordEn;
         wordEn = engFieldWord.getText();
 
         if (!wordEn.equals("")) {
