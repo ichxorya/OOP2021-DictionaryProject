@@ -18,3 +18,22 @@ Ill	Ốm
 Wrong	Sai
 Or	Hoặc
 Right	Phải
+Buy	Mua
+Flower	Hoa
+New	Mới
+Cringe	Khúm núm
+Big	To
+Verb	Động từ
+Visit	Thăm
+Thousands	Ngàn
+Pink	Hồng
+Nice	Hảo
+Image	Ảnh
+Hole	Hố
+He	Anh ấy
+History	Lịch sử
+Hot	Nóng
+Hen	Gà mái
+Hell	Địa ngục
+Love	Tình yêu
+Castle	Lâu đài
