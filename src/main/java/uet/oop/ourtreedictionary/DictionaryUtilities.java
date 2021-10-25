@@ -1,10 +1,10 @@
 package uet.oop.ourtreedictionary;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.LineNumberReader;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -87,6 +87,34 @@ public class DictionaryUtilities {
         } catch (IOException e) {
             System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
             // e.printStackTrace();  for debugging
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Export to file (Utility Method).
+     */
+    static void dictionaryExportToFileUtils(DictChar dictionaryEng) {
+        // Output date
+        Date today = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+        String strDate= dateFormatter.format(today);
+        String dictFileName = String.format("src/output%s.txt", strDate);
+
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(dictFileName))) {
+            ArrayList<String> dictToFile = new ArrayList<>();
+            dictionaryEng.dictToFileFiller(dictToFile, "", 0);
+            String inputLine;
+            int index = 0;
+            do {
+                inputLine = dictToFile.get(index);
+                out.write(inputLine);
+                out.newLine();
+                ++index;
+            } while (index < dictToFile.size());
+        } catch (IOException e) {
+            System.out.println("<!> Error during reading/writing <!>");
         }
     }
 
