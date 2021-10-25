@@ -37,3 +37,15 @@ Hen	Gà mái
 Hell	Địa ngục
 Love	Tình yêu
 Castle	Lâu đài
+Love castle	Lâu đài tình ái
+Long	Dài
+Low	Thấp
+Logarithm	Lô-ga-rít
+Function	Hàm số
+Hero	Anh hùng
+Ghost	Ma
+Canada	Canada
+Cat	Mèo
+Cow	Bò
+Coconut	Dừa
+Pineapple	Dứa
