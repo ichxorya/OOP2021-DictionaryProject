@@ -324,8 +324,8 @@ public class DictionaryManagementCmd {
                 //Input
                 dictionaryEng.addWord(wordEng, wordVie);
                 dictionaryVie.addWord(wordVie, wordEng);
-                System.out.println("Done");
             }
+            System.out.println("Imported from file!");
         } catch (IOException e) {
             System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
             // e.printStackTrace();  for debugging

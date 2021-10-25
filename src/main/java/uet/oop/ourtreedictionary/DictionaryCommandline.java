@@ -8,8 +8,6 @@ package uet.oop.ourtreedictionary;
 
 public class DictionaryCommandline {
 
-
-
     //----------------------------------------------------------------------------------------------------------------------------------//
 
     DictionaryManagementCmd cliDictionary = new DictionaryManagementCmd();   // init a dictionary management to use.
