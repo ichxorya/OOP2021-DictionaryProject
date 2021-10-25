@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.util.Collections;
+import java.util.Scanner;
 
 /**
  * DictionaryUtilities class.
@@ -53,17 +54,40 @@ public class DictionaryUtilities {
     //----------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Count the number of lines of a file.
+     * Insert from file (Utility method).
      */
-    static int numberOfLines(File file) throws IOException {
-        FileReader readFile = new FileReader(file);
-        LineNumberReader lineNumberReader = new LineNumberReader(readFile);
+    static void insertFromFileUtils(DictChar dictionaryEng, DictChar dictionaryVie) {
+        Scanner sc;    // Using scanner to receive data from external file.
+        Scanner parser;    // Using scanner to parse strings from external file.
+        String wordEng;
+        String wordVie;
+        String readLine;
 
-        int lineNumber = 0;
-        while (lineNumberReader.readLine() != null) {
-            lineNumber++;
+        try {
+            // Open file
+            FileReader dictionaryFile = new FileReader("src\\dictionaries.txt");
+
+            // Read file
+            sc = new Scanner(dictionaryFile);
+
+            // Imply that the input file is P E R F E C T
+            while (sc.hasNextLine()) {
+                readLine = sc.nextLine();
+                parser = new Scanner(readLine);
+                parser.useDelimiter("\t");
+
+                wordEng = parser.next();
+                wordVie = parser.next();
+
+                //Input
+                dictionaryEng.addWord(wordEng, wordVie);
+                dictionaryVie.addWord(wordVie, wordEng);
+            }
+            System.out.println("Imported from file!");
+        } catch (IOException e) {
+            System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
+            // e.printStackTrace();  for debugging
         }
-        return lineNumber;
     }
 
     //----------------------------------------------------------------------------------------------------------------//

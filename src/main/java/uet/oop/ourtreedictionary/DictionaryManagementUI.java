@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import static uet.oop.ourtreedictionary.DictionaryUtilities.insertFromFileUtils;
+
 public class DictionaryManagementUI {
 
     //-----------------------------------------------------------------------------------------------------------------------------//
@@ -142,36 +144,7 @@ public class DictionaryManagementUI {
      * Insert from file.
      */
     void insertFromFile() {
-        Scanner sc;    // Using scanner to receive data from external file.
-        Scanner parser;    // Using scanner to parse strings from external file.
-        String wordEng;
-        String wordVie;
-        String readLine;
-
-        try {
-            // Open file
-            FileReader dictionaryFile = new FileReader("src\\dictionaries.txt");
-
-            // Read file
-            sc = new Scanner(dictionaryFile);
-
-            // Imply that the input file is P E R F E C T
-            while (sc.hasNextLine()) {
-                readLine = sc.nextLine();
-                parser = new Scanner(readLine);
-                parser.useDelimiter("\t");
-
-                wordEng = parser.next();
-                wordVie = parser.next();
-
-                //Input
-                dictionaryEng.addWord(wordEng, wordVie);
-                dictionaryVie.addWord(wordVie, wordEng);
-            }
-        } catch (IOException e) {
-            System.out.println("<!> Make sure you have dictionaries.txt in the src folder <!>");
-            // e.printStackTrace();  for debugging
-        }
+        insertFromFileUtils(dictionaryEng, dictionaryVie);
     }
 
     //-----------------------------------------------------------------------------------------------------------------------------//
