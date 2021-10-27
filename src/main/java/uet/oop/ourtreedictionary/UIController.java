@@ -1,9 +1,6 @@
 package uet.oop.ourtreedictionary;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 
 import java.util.Objects;
 
@@ -236,8 +233,30 @@ public class UIController {
     @FXML
     private Label isModWordDone = new Label();                      // Label return system respond action success or not
 
+    @FXML
+    private Label modifyWordLabel = new Label();
+
+    @FXML
+    private Button refressButton = new Button();
+
     /**
-     * Modify the word but keep it meaning.
+     * Do nothing (reset state-view).
+     */
+    @FXML
+    protected void refresher() {
+        if (togEng.isSelected()) {
+            modWordOld.setPromptText("Input Old Word");
+            modWordNew.setPromptText("Input New Word");
+            modifyWordLabel.setText("Modify Word");
+        } else {
+            modWordOld.setPromptText("Input Old Meaning");
+            modWordNew.setPromptText("Input New Meaning");
+            modifyWordLabel.setText("Modify Meaning");
+        }
+    }
+
+    /**
+     * Modify the word but keep it meaning / modify its meaning but keep the word.
      */
     @FXML
     protected void modifyWord() {
@@ -252,60 +271,31 @@ public class UIController {
 
         boolean bothNotEmpty = (!Objects.equals(modWordOldStr, "") && !Objects.equals(modWordNewStr, ""));
 
+        if (togEng.isSelected()) {
+            modWordOld.setPromptText("Input Old Word");
+            modWordNew.setPromptText("Input New Word");
+            modifyWordLabel.setText("Modify Word");
+        } else {
+            modWordOld.setPromptText("Input Old Meaning");
+            modWordNew.setPromptText("Input New Meaning");
+            modifyWordLabel.setText("Modify Meaning");
+        }
+
+
         if (bothNotEmpty) {
             if (togEng.isSelected()) {
+
                 isModWordDone.setText(
                         dictionary.dictionaryModWord(
                                 modWordOldStr, modWordNewStr, dictionary.dictionaryEng));
             } else {
+
                 isModWordDone.setText(
                         dictionary.dictionaryModWord(
                                 modWordOldStr, modWordNewStr, dictionary.dictionaryVie));
             }
         } else {
             isModWordDone.setText("Input both old and new word");
-        }
-    }
-
-                    //---------------------------------//
-
-    @FXML
-    private TextField modMeanOld = new TextField();                 // the modified word input field.
-
-    @FXML
-    private TextField modMeanNew = new TextField();                 // new meaning input field.
-
-    @FXML
-    private Label isModMeanDone = new Label();                      // Label return system respond action success or not
-
-    /**
-     * Modify the meaning of the word.
-     */
-    @FXML
-    protected void modifyMeaning() {
-        String modMeanOldStr = "";
-        String modMeanNewStr = "";
-        if (!modMeanOld.getText().equals("")) {
-            modMeanOldStr = DictionaryUtilities.standardize(modMeanOld.getText());
-        }
-        if (!modMeanNew.getText().equals("")) {
-            modMeanNewStr = DictionaryUtilities.standardize(modMeanNew.getText());
-        }
-
-        boolean bothNotEmpty = (!Objects.equals(modMeanOldStr, "") && !Objects.equals(modMeanNewStr, ""));
-
-        if (bothNotEmpty) {
-            if (togEng.isSelected()) {
-                isModMeanDone.setText(
-                        dictionary.dictionaryModMeaning(
-                                modMeanOldStr, modMeanNewStr, dictionary.dictionaryEng));
-            } else {
-                isModMeanDone.setText(
-                        dictionary.dictionaryModMeaning(
-                                modMeanOldStr, modMeanNewStr, dictionary.dictionaryVie));
-            }
-        } else {
-            isModMeanDone.setText("Input both old and new meaning of the word");
         }
     }
 
